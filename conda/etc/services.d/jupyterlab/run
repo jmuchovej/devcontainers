@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv zsh
+
+exec /opt/conda/bin/jupyter lab /workspace

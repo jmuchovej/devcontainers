@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv zsh
+
+container=$(echo ${CONTAINER} | cut -d ":" -f 1)
+
+case "${container}" in
+    "jmuchovej/julia")
+        ;;
+    "jmuchovej/python")
+        ;;
+esac

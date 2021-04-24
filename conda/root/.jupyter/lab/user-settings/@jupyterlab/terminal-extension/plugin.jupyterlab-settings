@@ -1,0 +1,14 @@
+{
+    // Terminal
+    // @jupyterlab/terminal-extension:plugin
+    // Terminal settings.
+    // *************************************
+
+    // Font family
+    // The font family used to render text.
+    "fontFamily": "Fira Code",
+
+    // Theme
+    // The theme for the terminal.
+    "theme": "dark"
+}

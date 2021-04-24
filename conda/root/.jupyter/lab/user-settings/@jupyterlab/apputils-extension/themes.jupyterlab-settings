@@ -1,0 +1,22 @@
+{
+    // Theme
+    // @jupyterlab/apputils-extension:themes
+    // Theme manager settings.
+    // *************************************
+
+    // Theme CSS Overrides
+    // Override theme CSS variables by setting key-value pairs here
+    "overrides": {
+        "code-font-family": "Fira Code",
+        "content-font-family": "Fira Sans",
+        "ui-font-family": "Fira Sans"
+    },
+
+    // Selected Theme
+    // Application-level visual styling theme
+    "theme": "Tailwind Light",
+
+    // Scrollbar Theming
+    // Enable/disable styling of the application scrollbars
+    "theme-scrollbars": true
+}

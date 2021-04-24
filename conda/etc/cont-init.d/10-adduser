@@ -1,0 +1,24 @@
+#!/usr/bin/with-contenv zsh
+
+[ ! -d /workspace] && mkdir /workspace
+
+PUID=${PUID:-911}
+PGID=${PGID:-911}
+
+groupmod -o -g "${PGID}" abc
+usermod -o -u "${PUID}" abc
+
+echo "
+-------------------------------------
+GID/UID
+-------------------------------------
+uid:    $(id -u abc)
+gid:    $(id -g abc)
+-------------------------------------
+"
+
+# permissions
+chown -R abc:abc /app
+chown -R abc:abc /config
+chown -R abc:abc /defaults
+chown -R abc:abc /workspace
