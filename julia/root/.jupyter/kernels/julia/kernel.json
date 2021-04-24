@@ -1,0 +1,8 @@
+{
+    "env": {},
+    "display_name": "Julia",
+    "argv": ["/app/kernel", "{connection_file}" ],
+    "language": "julia",
+    "interrupt_mode": "signal"
+  }
+  
