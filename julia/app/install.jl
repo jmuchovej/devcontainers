@@ -1,3 +1,5 @@
+ENV["PYTHON"] = "/opt/conda/bin/python"
+
 using Pkg
 
 Pkg.activate()
@@ -8,5 +10,9 @@ Pkg.precompile()
 using IJulia
 installkernel(
     "Julia",
-    julia=`julia -p auto -t auto --project=@base -i --color=yes`,
+    julia=`julia -t auto --project=@base -i --color=yes`,
 )
+
+# Force Gen to precompile
+using Gen
+
