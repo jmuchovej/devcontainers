@@ -1,1 +1,1 @@
-[ echo ${CONTAINER} | grep -c "python" ] && exit 0
+[ $(echo ${CONTAINER} | grep -c "python") ] || exit 0

@@ -19,12 +19,18 @@ ENV PATH /opt/conda/bin:$PATH
 COPY conda/ /
 COPY --from=conda /opt/conda/ /opt/conda
 
+# Switch to ZSH and add Starship to get a slightly more usable shell
+RUN    chsh -s /usr/bin/zsh root \
+    && curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
+
+
 # Dependencies needed for `conda` to work
 RUN apt-get update && \
     apt-get install -y \
         curl \
         ca-certificates \
         fonts-firacode \
+        fontconfig \
         git \
         libglib2.0-0 \
         libsm6 \
@@ -36,9 +42,8 @@ RUN apt-get update && \
         wget \
         zip \
         zsh \
-    && apt-get clean
-
-RUN chsh -s /usr/bin/zsh abc
+    && apt-get clean \
+    && fc-cache -f -v
 
 # Install NodeJS for JupyterLab Extensions
 RUN conda env update -n base -f /root/env.yml
@@ -48,8 +53,6 @@ RUN jupyter labextension install \
         jupyterlab-plotly \
         jupyterlab-tailwind-theme
 
-# Add Starship to get a slightly more usable shell
-RUN curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
 
 EXPOSE 8888
 

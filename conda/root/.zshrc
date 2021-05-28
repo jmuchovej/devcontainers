@@ -7,4 +7,4 @@ conda activate base
 # Creates semi-customized shell to allow for friendlier CLI
 eval "$(starship init zsh)"
 
-alias julia="\julia -p auto -t auto --project=@base -i --color=yes"
+alias julia="\julia -t auto -i --color=yes"

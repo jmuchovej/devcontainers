@@ -1,4 +1,4 @@
-[ echo ${CONTAINER} | grep -c "julia" ] && exit 0
+[ $(echo ${CONTAINER} | grep -c "julia") ] || exit 0
 
 # enable multi-threading
 export JULIA_NUM_THREADS="$(nproc)"

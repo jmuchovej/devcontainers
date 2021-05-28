@@ -1,9 +1,12 @@
-#!/usr/bin/with-contenv zsh
+#!/usr/bin/with-contenv bash
 
-[ ! -d /workspace] && mkdir /workspace
+[ ! -d /workspace ] && mkdir /workspace
 
 PUID=${PUID:-911}
 PGID=${PGID:-911}
+
+chsh -s $(which zsh) root
+chsh -s $(which zsh) abc
 
 groupmod -o -g "${PGID}" abc
 usermod -o -u "${PUID}" abc
