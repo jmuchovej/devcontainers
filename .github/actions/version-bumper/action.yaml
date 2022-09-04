@@ -10,8 +10,14 @@ inputs:
     description: "Package name."
     required: true
 outputs:
-  version:
-    description: "Latest version found."
+  conda_version:
+    description: "Latest Conda version found."
+  conda_build_n:
+    description: "Latest Conda version's build number."
+  pkg_version:
+    description: "Latest desired package version."
+  pkg_build_n:
+    description: "Latest desired package build number."
 runs:
   using: "node16"
   main: "dist/index.js"
