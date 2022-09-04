@@ -14,4 +14,4 @@ outputs:
     description: "Latest version found."
 runs:
   using: "node16"
-  main: "main.mjs"
+  main: "dist/index.js"

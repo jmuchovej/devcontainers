@@ -1,6 +1,6 @@
-import core from "@actions/core";
-import axios from "axios";
-import semver from "semver";
+const core = require("@actions/core");
+const axios = require("axios").default;
+const semver = require("semver");
 
 
 // Conda API docs: https://api.anaconda.org/docs
@@ -27,21 +27,25 @@ const getLatest = async (pkg_owner, pkg_name) => {
     return { version: latest.version, build_n: latest.build[0] };
 }
 
-try {
-    const pkg_owner = core.getInput("owner");
-    const pkg_name = core.getInput("package");
-
-    const conda_latest = await getLatest("conda-forge", "conda");
-    core.setOutput("conda_version", conda_latest.version);
-    core.setOutput("conda_build_n", conda_latest.build_n);
-
-    const pkg_latest = await getLatest(pkg_owner, pkg_name);
-    if (pkg_latest) {
-        core.setOutput("pkg_version", pkg_latest.version);
-        core.setOutput("pkg_build_n", pkg_latest.build_n);
-    } else {
-	core.setFailed(`Failed to find valid version for \`${pkg_owner}/${pkg_name}\``)
+async function run() {
+    try {
+        const pkg_owner = core.getInput("owner");
+        const pkg_name = core.getInput("package");
+    
+        const conda_latest = await getLatest("conda-forge", "conda");
+        core.setOutput("conda_version", conda_latest.version);
+        core.setOutput("conda_build_n", conda_latest.build_n);
+    
+        const pkg_latest = await getLatest(pkg_owner, pkg_name);
+        if (pkg_latest) {
+            core.setOutput("pkg_version", pkg_latest.version);
+            core.setOutput("pkg_build_n", pkg_latest.build_n);
+        } else {
+    	core.setFailed(`Failed to find valid version for \`${pkg_owner}/${pkg_name}\``)
+        }
+    } catch (error) {
+        core.setFailed(error.message)
     }
-} catch (error) {
-    core.setFailed(error.message)
-}
+};
+
+run();

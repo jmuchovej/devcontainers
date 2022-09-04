@@ -4,7 +4,10 @@
   "description": "Retrieve versions from Anaconda",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest",
+    "all": "npm run lint && npm run prepare && npm run test"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,10 @@
     "@actions/core": "^1.9.1",
     "axios": "^0.27.2",
     "semver": "^7.3.7"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.34.0",
+    "eslint": "^8.23.0",
+    "jest": "^29.0.2"
   }
 }
