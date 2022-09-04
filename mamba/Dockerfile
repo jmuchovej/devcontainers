@@ -1,28 +1,29 @@
-# NOTE: Conda only supports x86_64
-ARG VERSION=latest
-FROM --platform=${TARGETPLATFORM} continuumio/miniconda3:${VERSION} as conda
+ARG CONDA_VERSION
+ARG CONDA_BUILD_N
+# This formulation is based on how condaforge/mambaforge labels their Docker images
+FROM --platform=${TARGETPLATFORM} condaforge/mambaforge:${CONDA_VERSION}-${CONDA_BUILD_N} as mamba
 
 # Base Dockerfile for Languages
 FROM --platform=${TARGETPLATFORM} lsiodev/ubuntu:focal as base
 ARG TARGETPLATFORM
 ARG BUILD_DATE
 ARG VERSION
+ARG BUILD_N
 
-LABEL MAINTAINER "John Muchovej <jmuchovej@gmail.com>"
-ENV CONTAINER=jmuchovej/conda:${VERSION}
+LABEL MAINTAINER "John Muchovej <john@muchovej.com>"
+ENV CONTAINER=jmuchovej/mamba:${VERSION}
 
 LABEL conda_version=${VERSION}
 LABEL build_version="jmuchovej, v${VERSION} on ${BUILD_DATE}"
 
 ENV PATH /opt/conda/bin:$PATH
 
-COPY conda/ /
-COPY --from=conda /opt/conda/ /opt/conda
+COPY . /
+COPY --from=mamba /opt/conda/ /opt/conda
 
 # Switch to ZSH and add Starship to get a slightly more usable shell
 RUN    chsh -s /usr/bin/zsh root \
-    && curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
-
+    && curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
 
 # Dependencies needed for `conda` to work
 RUN apt-get update && \
@@ -46,13 +47,12 @@ RUN apt-get update && \
     && fc-cache -f -v
 
 # Install NodeJS for JupyterLab Extensions
-RUN conda env update -n base -f /root/env.yml
+RUN mamba env update -n base -f /root/env.yml
 
 # Install JupyterLab Extensions for a more useful workspace
 RUN jupyter labextension install \
         jupyterlab-plotly \
         jupyterlab-tailwind-theme
-
 
 EXPOSE 8888
 

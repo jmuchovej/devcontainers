@@ -1,8 +1,0 @@
-{
-    "editorConfig": {
-        "fontFamily": "Fira Code",
-        "lineNumbers": true,
-        "codeFolding": true,
-        "rulers": [88, 120, ],
-    }
-}
