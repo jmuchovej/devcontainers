@@ -1,0 +1,18 @@
+name: "Build the `mamba` Container"
+
+on:
+  push:
+    paths:
+      - "mamba/**"
+  schedule:
+    cron:
+      - "5 4 * * */7"
+
+jobs:
+  build-mamba:
+    uses: "./.github/workflows/builder.yaml"
+    with:
+      package_owner: "conda-forge"
+      package_name: "conda"
+      build_context: ".mamba"
+      image_name: "mamba"

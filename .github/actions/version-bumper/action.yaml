@@ -1,0 +1,17 @@
+name: "conda-version-bumper"
+author: "John Muchovej"
+description: "Bumps the package based on the latest-published Conda version."
+inputs:
+  owner:
+    description: "Repository owner to source packages from."
+    required: false
+    default: "conda-forge"
+  package:
+    description: "Package name."
+    required: true
+outputs:
+  version:
+    description: "Latest version found."
+runs:
+  using: "node16"
+  main: "main.js"
