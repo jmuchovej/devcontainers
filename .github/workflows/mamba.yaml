@@ -11,9 +11,9 @@ on:
 
 jobs:
   build-mamba:
-    uses: "./.github/workflows/builder.yaml"
+    uses: "./.github/workflows/mamba-builder.yaml"
     with:
       package_owner: "conda-forge"
       package_name: "conda"
-      build_context: ".mamba"
+      build_context: "./mamba"
       image_name: "mamba"

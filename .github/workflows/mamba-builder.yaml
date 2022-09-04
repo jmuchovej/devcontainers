@@ -1,4 +1,4 @@
-name: "Build Dockerfile for Environment"
+name: "Build Dockerfile for Mamba-based Environment"
 
 on:
   workflow_call:
