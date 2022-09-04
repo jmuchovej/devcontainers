@@ -17,3 +17,4 @@ jobs:
       package_name: "conda"
       build_context: "./mamba"
       image_name: "mamba"
+    secrets: inherit
