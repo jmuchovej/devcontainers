@@ -70,7 +70,7 @@ jobs:
           context: "${{ inputs.build_context }}"
           build-args: |
             CONDA_VERSION=${{ steps.vbump.outputs.conda_version }}
-            CONDA_BUILD_N=${{ steps.vbump.outputs.conda_build }}
+            CONDA_BUILD_N=${{ steps.vbump.outputs.conda_build_n }}
             VERSION=${{ steps.vbump.outputs.pkg_version }}
             BUILD_N=${{ steps.vbump.outputs.pkg_build_n }}
             BUILD_DATE=${{ steps.setup.outputs.build-date }}
