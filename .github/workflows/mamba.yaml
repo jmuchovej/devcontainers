@@ -4,9 +4,9 @@ on:
   push:
     paths:
       - "mamba/**"
+      - ".github/workflows/mamba.yaml"
   schedule:
-    cron:
-      - "5 4 * * */7"
+    - cron: "5 4 * * */7"
 
 jobs:
   build-mamba:
