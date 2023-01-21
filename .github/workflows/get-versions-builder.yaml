@@ -1,0 +1,65 @@
+name: "Check versions of relevant programming languages"
+
+on:
+  workflow_call:
+    inputs:
+      language:
+        required: true
+        type: string
+
+jobs:
+  check-versions:
+    runs-on: "ubuntu-latest"
+    steps:
+      - id: "checkout"
+        name: "Checkout `containers` repository"
+        uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 0
+
+      - id: "checkout-HEAD"
+        run: |
+          git pull
+          git checkout HEAD
+
+      - id: "setup-node"
+        name: "Setup NodeJS"
+        uses: "actions/setup-node@v3"
+        with:
+          node-version: "18" 
+
+      - id: "setup-pnpm"
+        name: "Setup `pnpm`"
+        uses: "pnpm/action-setup@v2"
+        with:
+          version: "latest"
+          run_install: false
+
+      - name: "Get `pnpm` store"
+        id: "pnpm-store"
+        shell: "bash"
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: "actions/cache@v3"
+        id: "pnpm-cache"
+        name: "Setup `pnpm` cache"
+        with:
+          path: "${{ steps.pnpm-store.outputs.STORE_PATH }}"
+          key: "${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}"
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: "Install dependencies"
+        id: "pnpm-install"
+        run: "pnpm install"
+
+      - name: "Checks DockerHub for Language Version Bumps"
+        run: "./versions.d/get-versions.mjs -l ${{ inputs.language }}"
+
+      - name: "Add `.versions.d/${{ inputs.language }}.json`"
+        uses: "endbug/add-and-commit@v9"
+        with:
+          add: "./versions.d/${{ inputs.language }}.json"
+          message: "Tracking `.versions.d/${{ inputs.language }}.json` to latest versions"
+          push: true

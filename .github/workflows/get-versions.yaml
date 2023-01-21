@@ -1,0 +1,42 @@
+name: "Check versions of relevant programming languages"
+
+on:
+  push:
+    paths:
+      - "versions.d/get-versions.mjs"
+      - "versions.d/_sources.jsonc"
+  schedule:
+    - cron: "5 4 * * */7"
+  workflow_dispatch:
+
+jobs:
+  check-python:
+    if: "${{ always() }}"
+    uses: "./.github/workflows/get-versions-builder.yaml"
+    with:
+      language: "python"
+    secrets: "inherit"
+
+  check-julia:
+    if: "${{ always() }}"
+    needs: ["check-python"]
+    uses: "./.github/workflows/get-versions-builder.yaml"
+    with:
+      language: "julia"
+    secrets: "inherit"
+
+  check-node:
+    if: "${{ always() }}"
+    needs: ["check-julia"]
+    uses: "./.github/workflows/get-versions-builder.yaml"
+    with:
+      language: "node"
+    secrets: "inherit"
+
+  check-rbase:
+    if: "${{ always() }}"
+    needs: ["check-node"]
+    uses: "./.github/workflows/get-versions-builder.yaml"
+    with:
+      language: "rbase"
+    secrets: "inherit"
