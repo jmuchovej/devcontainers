@@ -46,7 +46,8 @@ RUN apt update; \
 
 RUN mkdir -p /workspace; \
     chown -R abc:abc /workspace; \
-    chmod g+rws /workspace;
+    chmod g+rws /workspace; \
+    usermod -m -d /home/abc abc;
 # endregion
 
 USER abc
