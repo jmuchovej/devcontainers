@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-arch:latest
+FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-ubuntu:latest
 ARG TARGETPLATFORM
 ARG TARGETARCH
 ARG BUILD_DATE
