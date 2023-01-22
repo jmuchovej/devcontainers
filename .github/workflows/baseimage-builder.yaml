@@ -3,7 +3,7 @@ name: "Build Dockerfile for Mamba-based Environment"
 on:
   workflow_call:
     inputs:
-      dockerTag:
+      docker_tag:
         required: true
         type: string
       build_context:

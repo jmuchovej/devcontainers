@@ -30,14 +30,14 @@ jobs:
           echo "${{ steps.changed-files.outputs.all_modified_files }}"
           echo "matrix=${{ steps.changed-files.outputs.all_modified_files }}" >> "$GITHUB_OUTPUT"
 
-  build-baseimage:
+  build-baseimages:
     needs: "generate-matrix"
     strategy:
       matrix:
-        dockerTag: "${{ fromJson(needs.generate-matrix.outputs.matrix) }}"
+        docker_tag: "${{ fromJson(needs.generate-matrix.outputs.matrix) }}"
     name: "${{ matrix.name }}"
     uses: "./.github/workflows/baseimage-builder.yaml"
     with:
-      docker_tag: "${{ matrix.dockerTag }}"
-      build_context: "docker.d/${{ matrix.dockerTag }}"
+      docker_tag: "${{ matrix.docker_tag }}"
+      build_context: "docker.d/${{ matrix.docker_tag }}"
     secrets: inherit
