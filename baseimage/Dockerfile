@@ -51,6 +51,6 @@ RUN mkdir -p /workspace; \
 
 USER abc
 
-RUN . /etc/profile.d/01-ensurepath.sh; \
+RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     python3 -m pip install --user pipx; \
     pipx install pre-commit;
