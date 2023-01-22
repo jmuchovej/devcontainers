@@ -6,6 +6,7 @@ on:
       - "baseimage/**"
       - ".github/workflows/baseimage-metabuilder.yaml"
   workflow_call:
+  workflow_dispatch:
 
 jobs:
   build-environment:
