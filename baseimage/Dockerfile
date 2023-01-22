@@ -48,7 +48,8 @@ RUN mkdir -p /workspace; \
     chown -R abc:abc /workspace; \
     chmod g+rws /workspace; \
     usermod -m -d /home/abc abc; \
-    chmod -R 2775 /home/abc;
+    chmod -R 2775 /home/abc; \
+    mkdir -p /home/abc/.local/bin;
 # endregion
 
 USER abc
