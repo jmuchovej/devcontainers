@@ -55,7 +55,8 @@ jobs:
         run: "pnpm install"
 
       - name: "Checks DockerHub for Language Version Bumps"
-        run: "./versions.d/get-versions.mjs -l ${{ inputs.language }}"
+        run: |
+          ./versions.d/get-versions.mjs -l ${{ inputs.language }}
 
       - name: "Add `.versions.d/${{ inputs.language }}.json`"
         uses: "endbug/add-and-commit@v9"
