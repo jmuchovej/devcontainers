@@ -1,4 +1,4 @@
-name: "Build the `mamba` Container"
+name: "Build all `baseimage` Containers"
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 
 jobs:
   generate-matrix:
+    name: "Generate Job Matrix for `baseimage` construction"
     runs-on: "ubuntu-latest"
     outputs:
       strategy: "${{ steps.generate-matrix.outputs.matrix }}"
@@ -29,7 +30,7 @@ jobs:
           echo "${{ steps.changed-files.outputs.all_modified_files }}"
           echo "matrix=${{ steps.changed-files.outputs.all_modified_files }}" >> "$GITHUB_OUTPUT"
 
-  build-mamba:
+  build-baseimage:
     needs: "generate-matrix"
     strategy:
       matrix:
