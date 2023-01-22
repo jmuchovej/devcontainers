@@ -15,7 +15,7 @@ const VERSIONS = JSON.parse(stripJSONComments(
 ));
 
 const argv = yargs(process.argv.slice(2))
-  .usage("Usage $0 --lang")
+  .usage("Usage $0 --lang [lang]")
   .alias("l", "lang")
   .nargs("l", 1)
   .choices("l", Object.keys(VERSIONS))

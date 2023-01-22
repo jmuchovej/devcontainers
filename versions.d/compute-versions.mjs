@@ -1,12 +1,9 @@
 #!/usr/bin/env node
-import axios from "axios";
 import _ from "lodash-es";
-import semver, { major } from "semver";
 import fs from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import stripJSONComments from "strip-json-comments";
-import yargs from "yargs";
 import nunjucks from "nunjucks";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
