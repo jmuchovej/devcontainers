@@ -16,6 +16,9 @@ jobs:
     steps:
       - id: "checkout"
         uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 3
+
       - name: Run changed-files with dir_names
         id: changed-files
         uses: tj-actions/changed-files@v35
