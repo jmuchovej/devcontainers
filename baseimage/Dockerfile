@@ -1,5 +1,6 @@
-FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-ubuntu:jammy
+FROM --platform=${TARGETPLATFORM} ghcr.io/linuxserver/baseimage-arch:latest
 ARG TARGETPLATFORM
+ARG TARGETARCH
 ARG BUILD_DATE
 ARG VERSION
 ARG PYTHON
@@ -7,13 +8,14 @@ ARG JULIA
 ARG NODE
 ARG R
 
-LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>"
+LABEL MAINTAINER "John Muchovej <mail@jmuchovej.com>"
 ENV CONTAINER="jmuchovej/baseimage:${VERSION}"
 
 COPY . /
 
 # region Package installation & Directory setup
 USER root
+# NB: Can't install `yq` and `gotop` from upstream repositories
 RUN apt update; \
     apt install -y \
         ca-certificates \
@@ -22,7 +24,6 @@ RUN apt update; \
         fontconfig \
         fonts-firacode \
         git \
-        gotop \
         htop \
         jq \
         less \
@@ -33,7 +34,6 @@ RUN apt update; \
         unzip \
         vim \
         wget \
-        yq \
         zip \
         zsh \
     ; \
