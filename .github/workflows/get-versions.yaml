@@ -7,6 +7,7 @@ on:
       - ".github/workflows/get-versions-builder.yaml"
       - "versions.d/get-versions.mjs"
       - "versions.d/_sources.jsonc"
+      - "Dockerfile.njk"
   schedule:
     - cron: "5 4 * * */7"
   workflow_dispatch:

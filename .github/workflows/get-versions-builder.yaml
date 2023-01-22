@@ -1,4 +1,4 @@
-name: "Check versions of relevant programming languages"
+name: "Get language-specific releases"
 
 on:
   workflow_call:
