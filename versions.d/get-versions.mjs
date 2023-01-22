@@ -23,7 +23,7 @@ const argv = yargs(process.argv.slice(2))
   .demandOption(["l"])
   .help("h")
   .alias("h", "help")
-  .argv
+  .argv;
 
 const LANG = VERSIONS[argv.lang]
 

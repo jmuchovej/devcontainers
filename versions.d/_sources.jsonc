@@ -13,7 +13,7 @@
         "semver": "=18 || =19",
         "namespace": "library",
         "repository": "node",
-        "versionPrefix": "js"
+        "versionPrefix": "node"
     },
     "julia": {
         // Running list of Julia versions & support statuses

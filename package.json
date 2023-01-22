@@ -3,6 +3,7 @@
 		"axios": "^1.2.3",
 		"lodash": "^4.17.21",
 		"lodash-es": "^4.17.21",
+		"nunjucks": "^3.2.3",
 		"semver": "^7.3.8",
 		"strip-json-comments": "^5.0.0",
 		"yargs": "^17.6.2"
