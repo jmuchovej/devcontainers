@@ -30,6 +30,7 @@ RUN apt update; \
         neovim \
         # pipx \
         python3 \
+        python3-venv \
         python3-pip \
         tmux \
         unzip \
@@ -47,9 +48,9 @@ RUN apt update; \
 RUN mkdir -p /workspace; \
     chown -R abc:abc /workspace; \
     chmod g+rws /workspace; \
-    usermod -m -d /home/abc abc; \
+    usermod -m -d /home/abc -s /bin/zsh abc; \
     chmod -R 2775 /home/abc; \
-    mkdir -p /home/abc/.local/bin;
+    chown -R abc:abc /home/abc;
 # endregion
 
 USER abc
