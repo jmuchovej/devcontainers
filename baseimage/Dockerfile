@@ -55,4 +55,4 @@ USER abc
 
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     python3 -m pip install --user pipx; \
-    pipx install pre-commit;
+    python3 -m pipx install pre-commit;
