@@ -12,7 +12,8 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - id: "setup"
-        run: "echo '::set-output name=build-date::$(date)'"
+        run: |
+          echo "build-date=$(date)" >> $GITHUB_OUTPUT
 
       - id: "checkout"
         name: "Checkout repository"

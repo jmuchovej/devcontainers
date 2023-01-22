@@ -15,7 +15,8 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - id: "setup"
-        run: "echo '::set-output name=build-date::$(date)'"
+        run: |
+          echo "build-date=$(date)" >> $GITHUB_OUTPUT
 
       - id: "checkout"
         name: "Checkout repository"
@@ -59,4 +60,6 @@ jobs:
             BUILD_DATE=${{ steps.setup.outputs.build-date }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/baseimage:${{ inputs.docker_tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/baseimage:${{ inputs.docker_tag }}-${{ github.sha }}
             ghcr.io/${{ github.repository_owner }}/baseimage:${{ inputs.docker_tag }}
+            ghcr.io/${{ github.repository_owner }}/baseimage:${{ inputs.docker_tag }}-${{ github.sha }}
