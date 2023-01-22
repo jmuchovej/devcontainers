@@ -1,0 +1,42 @@
+name: "Build the `mamba` Container"
+
+on:
+  push:
+    paths:
+      - "docker.d/**/Dockerfile"
+      - "versions.d/*.json"
+  workflow_dispatch:
+
+jobs:
+  generate-matrix:
+    runs-on: "ubuntu-latest"
+    outputs:
+      strategy: "${{ steps.generate-matrix.outputs.matrix }}"
+    steps:
+      - id: "checkout"
+        uses: "actions/checkout@v3"
+      - name: Run changed-files with dir_names
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+        with:
+          path: "docker.d/"
+          dir_names: "true"
+          diff_relative: "true"
+          json: "true"
+      - id: "generate-matrix"
+        name: "Generate Matrix of Docker Images to Build"
+        run: |
+          echo "${{ steps.changed-files.outputs.all_modified_files }}"
+          echo "matrix=${{ steps.changed-files.outputs.all_modified_files }}" >> "$GITHUB_OUTPUT"
+
+  build-mamba:
+    needs: "generate-matrix"
+    strategy:
+      matrix:
+        dockerTag: "${{ fromJson(needs.generate-matrix.outputs.matrix) }}"
+    name: "${{ matrix.name }}"
+    uses: "./.github/workflows/baseimage-builder.yaml"
+    with:
+      docker_tag: "${{ matrix.dockerTag }}"
+      build_context: "docker.d/${{ matrix.dockerTag }}"
+    secrets: inherit
