@@ -1,0 +1,47 @@
+FROM --platform=${TARGETPLATFORM} ghcr.io/jmuchovej/baseimage:metabuilder-latest
+ARG TARGETPLATFORM
+ARG BUILD_DATE
+
+LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>" \
+      CONTAINER "jmuchovej/baseimage:{{ dockerTag }}"
+
+USER abc
+
+RUN source /etc/profile.d/01-ensurepath.sh
+
+{%- if versions.python %}
+# region Python Setup
+RUN pipx install pipenv; \
+    curl https://pyenv.run | PYENV_ROOT=${PYENV_ROOT} bash; \
+    pyenv install {{ versions.python }} 
+# endregion
+{% endif %}
+
+{%- if versions.julia %}
+# region Julia Setup
+RUN source /etc/profile.d/01-ensurepath.sh; \
+    curl -fsSL https://install.julialang.org | sh -s -- --yes --default-channel {{ versions.julia }}; \
+# endregion
+{% endif %}
+
+{%- if versions.rbase %}
+# region R Setup
+RUN apt install \
+        r-base={{ versions.rbase }}-* \
+        r-base-dev={{ versions.rbase }}-* \
+            r-base-core={{ versions.rbase }}-* \
+        r-recommended={{ versions.rbase }}-* \
+    ; \
+    rm -rf /var/lib/apt/lists/*; \
+    apt clean; \
+# endregion
+{% endif %}
+
+{%- if versions.node %}
+# region Node.js Setup
+RUN curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | NVM_DIR=${NVM_DIR} bash; \
+    source ${NVM_DIR}/nvm.sh; \
+    nvm install {{ versions.node }}; \
+    nvm alias default {{ versions.node }}; 
+# endregion
+{% endif -%}

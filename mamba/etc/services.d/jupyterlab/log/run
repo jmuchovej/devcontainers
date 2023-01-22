@@ -1,6 +1,0 @@
-#!/usr/bin/with-contenv zsh
-
-mkdir -p /var/log/jupyterlab
-chown nobody:nogroup /var/log/jupyterlab
-
-exec logutil-service /var/log/jupyterlab

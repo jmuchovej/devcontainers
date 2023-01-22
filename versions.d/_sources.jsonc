@@ -1,0 +1,34 @@
+{
+    "python": {
+        // Running list of Python versions & support statuses
+        //   https://devguide.python.org/versions/
+        "semver": "=3.10 || =3.11",
+        "namespace": "library",
+        "repository": "python",
+        "versionPrefix": "py"
+    },
+    "node": {
+        // Running list of Node versions & support statuses
+        //   https://github.com/nodejs/release#release-schedule
+        "semver": "=18 || =19",
+        "namespace": "library",
+        "repository": "node",
+        "versionPrefix": "node"
+    },
+    "julia": {
+        // Running list of Julia versions & support statuses
+        //   https://julialang.org/downloads/
+        "semver": "=1.6.7 || =1.8",
+        "namespace": "library",
+        "repository": "julia",
+        "versionPrefix": "jl"
+    },
+    "rbase": {
+        // Running list of R versions & support statuses
+        //   https://developer.r-project.org/
+        "semver": "=4.1.3 || =4.2",
+        "namespace": "library",
+        "repository": "r-base",
+        "versionPrefix": "r"
+    }
+}
