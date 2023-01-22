@@ -28,7 +28,9 @@ RUN apt update; \
         jq \
         less \
         neovim \
+        pipx \
         python3 \
+        python3-pip \
         tmux \
         unzip \
         unzip \
@@ -49,6 +51,5 @@ RUN mkdir -p /workspace; \
 
 USER abc
 
-RUN source /etc/profile.d/01-ensurepath.sh; \
-    python3 -m pip install --user pipx; \
+RUN . /etc/profile.d/01-ensurepath.sh; \
     pipx install pre-commit;
