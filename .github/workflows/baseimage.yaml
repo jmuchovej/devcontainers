@@ -6,13 +6,16 @@ on:
       - "docker.d/**/Dockerfile"
       - "versions.d/*.json"
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Check versions of relevant programming languages"]
+    types: [completed]
 
 jobs:
   generate-matrix:
     name: "Generate Job Matrix for `baseimage` construction"
     runs-on: "ubuntu-latest"
     outputs:
-      strategy: "${{ steps.generate-matrix.outputs.matrix }}"
+      matrix: "${{ steps.generate-matrix.outputs.matrix }}"
     steps:
       - id: "checkout"
         uses: "actions/checkout@v3"
@@ -27,6 +30,7 @@ jobs:
           dir_names: "true"
           diff_relative: "true"
           json: "true"
+
       - id: "generate-matrix"
         name: "Generate Matrix of Docker Images to Build"
         run: |
