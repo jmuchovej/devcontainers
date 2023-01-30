@@ -8,6 +8,7 @@ LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>" \
 {%- if versions.python %}
 # region Python Setup
 USER abc
+ENV PYENV_ROOT /usr/local/pyenv
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     pipx install pipenv; \
     curl https://pyenv.run | PYENV_ROOT=${PYENV_ROOT} bash; \
@@ -40,10 +41,12 @@ RUN apt install \
 {%- if versions.node %}
 # region Node.js Setup
 USER abc
+ENV NVM_DIR /usr/local/nvm
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | NVM_DIR=${NVM_DIR} bash; \
     . ${NVM_DIR}/nvm.sh; \
     nvm install {{ versions.node }}; \
-    nvm alias default {{ versions.node }}; 
+    nvm alias default {{ versions.node }}; \
+    nvm use defaualt
 # endregion
 {% endif -%}
