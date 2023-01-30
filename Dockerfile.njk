@@ -47,6 +47,6 @@ RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     . ${NVM_DIR}/nvm.sh; \
     nvm install {{ versions.node }}; \
     nvm alias default {{ versions.node }}; \
-    nvm use defaualt
+    nvm use default
 # endregion
 {% endif -%}
