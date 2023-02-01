@@ -13,6 +13,12 @@ ENV CONTAINER="jmuchovej/baseimage:${VERSION}"
 
 COPY . /
 
+ENV PYENV_ROOT "/usr/local/pyenv" \
+    NVM_DIR "/usr/local/nvm" \
+    R_HOME "/usr/local/R" \
+    JULIAUP_ROOT "/usr/local/juliaup" \
+    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
+
 # region Package installation & Directory setup
 USER root
 # NB: Can't install `yq` and `gotop` from upstream repositories
@@ -55,12 +61,6 @@ RUN mkdir -p /workspace; \
     chmod -R 2775 /home/abc; \
     chown -R abc:abc /home/abc;
 # endregion
-
-ENV PYENV_ROOT "/usr/local/pyenv" \
-    NVM_DIR "/usr/local/nvm" \
-    R_HOME "/usr/local/R" \
-    JULIAUP_ROOT "/usr/local/juliaup" \
-    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
 
 RUN mkdir -p \ 
         ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \

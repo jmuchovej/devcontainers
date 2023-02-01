@@ -5,6 +5,12 @@ ARG BUILD_DATE
 LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>" \
       CONTAINER "jmuchovej/baseimage:{{ dockerTag }}"
 
+ENV PYENV_ROOT "/usr/local/pyenv" \
+    NVM_DIR "/usr/local/nvm" \
+    R_HOME "/usr/local/R" \
+    JULIAUP_ROOT "/usr/local/juliaup" \
+    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
+
 {%- if versions.python %}
 # region Python Setup
 USER abc
