@@ -7,8 +7,6 @@ LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>" \
 
 {%- if versions.python %}
 # region Python Setup
-ENV PYENV_ROOT /usr/local/pyenv
-RUN mkdir -p ${PYENV_ROOT}
 USER abc
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     pipx install pipenv; \
@@ -21,7 +19,7 @@ RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
 # region Julia Setup
 USER abc
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
-    curl -fsSL https://install.julialang.org | sh -s -- --yes --default-channel {{ versions.julia }}; \
+    curl -fsSL https://install.julialang.org | sh -s -- --yes --default-channel {{ versions.julia }} -p ${JULIAUP_PATH}; \
 # endregion
 {% endif %}
 
@@ -41,8 +39,6 @@ RUN apt install \
 
 {%- if versions.node %}
 # region Node.js Setup
-ENV NVM_DIR /usr/local/nvm
-RUN mkdir -p ${NVM_DIR}
 USER abc
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | NVM_DIR=${NVM_DIR} bash; \
