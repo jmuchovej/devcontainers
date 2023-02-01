@@ -53,6 +53,19 @@ RUN mkdir -p /workspace; \
     chown -R abc:abc /home/abc;
 # endregion
 
+ENV PYENV_ROOT "/usr/local/pyenv" \
+    NVM_DIR "/usr/local/nvm" \
+    R_HOME "/usr/local/R" \
+    JULIAUP_ROOT "/usr/local/juliaup" \
+    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
+
+RUN mkdir -p \ 
+        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \
+    chmod 2775 \
+        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \
+    chown -R abc:abc \
+        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH};
+
 USER abc
 
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
