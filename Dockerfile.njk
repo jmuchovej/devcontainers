@@ -10,7 +10,9 @@ LABEL MAINTAINER "John Muchovej <jmuchovej@pm.me>" \
 USER abc
 RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
     pipx install pipenv; \
-    curl https://pyenv.run | PYENV_ROOT=${PYENV_ROOT} bash; \
+    curl https://pyenv.run | PYENV_ROOT=/tmp/pyenv bash; \
+    rsync -av /tmp/pyenv/ ${PYENV_ROOT}; \
+    rm -rf /tmp/pyenv; \
     pyenv install {{ versions.python }} 
 # endregion
 {% endif %}
