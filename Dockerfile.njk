@@ -9,12 +9,13 @@ ENV PYENV_ROOT "/usr/local/pyenv" \
     NVM_DIR "/usr/local/nvm" \
     R_HOME "/usr/local/R" \
     JULIAUP_ROOT "/usr/local/juliaup" \
-    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
+    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}" \
+    PATH "/usr/local/bin:${PATH}"
 
 {%- if versions.python %}
 # region Python Setup
-USER abc
-RUN pipx install pipenv; \
+ENV PATH "${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
+RUN pip install pipenv; \
     curl https://pyenv.run | PYENV_ROOT=/tmp/pyenv bash; \
     rsync -av /tmp/pyenv/ ${PYENV_ROOT}; \
     rm -rf /tmp/pyenv; \
@@ -24,7 +25,7 @@ RUN pipx install pipenv; \
 
 {%- if versions.julia %}
 # region Julia Setup
-USER abc
+ENV PATH "${JULIAUP_ROOT}/bin:${PATH}"
 RUN curl -fsSL https://install.julialang.org \
     | sh -s -- \
         --yes --default-channel {{ versions.julia }} -p ${JULIAUP_PATH};
@@ -33,7 +34,7 @@ RUN curl -fsSL https://install.julialang.org \
 
 {%- if versions.rbase %}
 # region R Setup
-USER root
+ENV PATH "${R_HOME}/bin:${PATH}"
 RUN apt install \
         r-base={{ versions.rbase }}-* \
         r-base-dev={{ versions.rbase }}-* \
@@ -47,8 +48,9 @@ RUN apt install \
 
 {%- if versions.node %}
 # region Node.js Setup
-USER abc
-RUN curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | NVM_DIR=${NVM_DIR} bash; \
+ENV PATH "${NVM_DIR}/bin:${PATH}"
+RUN curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh \
+        | NVM_DIR=${NVM_DIR} bash; \
     . ${NVM_DIR}/nvm.sh; \
     nvm install {{ versions.node }}; \
     nvm alias default {{ versions.node }}; \
