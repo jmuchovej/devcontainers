@@ -44,7 +44,9 @@ RUN apt update; \
     curl -fsSL https://starship.rs/install.sh | sh -s -- --yes; \
     rm -rf /var/lib/apt/lists/*; \
     apt clean; \
-    fc-cache -f -v;
+    fc-cache -f -v; \
+    python3 -m pip install pipx; \
+    python3 -m pipx install pre-commit;
 
 RUN mkdir -p /workspace; \
     chown -R abc:abc /workspace; \
@@ -66,9 +68,3 @@ RUN mkdir -p \
         ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \
     chown -R abc:abc \
         ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH};
-
-USER abc
-
-RUN HOME="/home/abc" . /etc/profile.d/01-ensurepath.sh; \
-    python3 -m pip install --user pipx; \
-    python3 -m pipx install pre-commit;

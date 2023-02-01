@@ -12,14 +12,16 @@ RUN pipx install pipenv; \
     curl https://pyenv.run | PYENV_ROOT=/tmp/pyenv bash; \
     rsync -av /tmp/pyenv/ ${PYENV_ROOT}; \
     rm -rf /tmp/pyenv; \
-    pyenv install {{ versions.python }} 
+    ${PYENV_ROOT}/bin/pyenv install {{ versions.python }} 
 # endregion
 {% endif %}
 
 {%- if versions.julia %}
 # region Julia Setup
 USER abc
-RUN curl -fsSL https://install.julialang.org | sh -s -- --yes --default-channel {{ versions.julia }} -p ${JULIAUP_PATH};
+RUN curl -fsSL https://install.julialang.org \
+    | sh -s -- \
+        --yes --default-channel {{ versions.julia }} -p ${JULIAUP_PATH};
 # endregion
 {% endif %}
 
