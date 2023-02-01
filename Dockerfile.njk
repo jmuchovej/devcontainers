@@ -15,11 +15,12 @@ ENV PATH="/usr/local/bin:${PATH}"
 {%- if versions.python %}
 # region Python Setup
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
-RUN pip install pipenv; \
-    curl https://pyenv.run | PYENV_ROOT=/tmp/pyenv bash; \
-    rsync -av /tmp/pyenv/ ${PYENV_ROOT}; \
-    rm -rf /tmp/pyenv; \
-    ${PYENV_ROOT}/bin/pyenv install {{ versions.python }} 
+RUN pip install pipenv;
+RUN curl https://pyenv.run | bash;
+RUN rsync -av /tmp/pyenv/ ${PYENV_ROOT};
+RUN rm -rf /tmp/pyenv;
+RUN ${PYENV_ROOT}/bin/pyenv install {{ versions.python }} 
+RUN chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT}
 # endregion
 {% endif %}
 
@@ -27,33 +28,37 @@ RUN pip install pipenv; \
 # region Julia Setup
 ENV PATH="${JULIAUP_ROOT}/bin:${PATH}"
 RUN curl -fsSL https://install.julialang.org \
-    | sh -s -- \
-        --yes --default-channel {{ versions.julia }} -p ${JULIAUP_PATH};
+        | sh -s -- --yes --default-channel {{ versions.julia }};
+RUN rsync -av ${HOME}/.juliaup/ ${JULIAUP_ROOT};
+RUN chmod 2775 ${JULIAUP_ROOT} && chown -R abc:abc ${JULIAUP_ROOT}
 # endregion
 {% endif %}
 
 {%- if versions.rbase %}
 # region R Setup
 ENV PATH="${R_HOME}/bin:${PATH}"
+RUN apt update -yq;
 RUN apt install \
         r-base={{ versions.rbase }}-* \
         r-base-dev={{ versions.rbase }}-* \
             r-base-core={{ versions.rbase }}-* \
         r-recommended={{ versions.rbase }}-* \
-    ; \
-    rm -rf /var/lib/apt/lists/*; \
-    apt clean;
+    ;
+RUN rm -rf /var/lib/apt/lists/*;
+RUN apt clean;
+RUN chmod 2775 ${R_HOME} && chown -R abc:abc ${R_HOME}
 # endregion
 {% endif %}
 
 {%- if versions.node %}
 # region Node.js Setup
 ENV PATH="${NVM_DIR}/bin:${PATH}"
-RUN curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh \
-        | NVM_DIR=${NVM_DIR} bash; \
-    . ${NVM_DIR}/nvm.sh; \
-    nvm install {{ versions.node }}; \
-    nvm alias default {{ versions.node }}; \
-    nvm use default
+RUN curl -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | bash;
+RUN echo $(ls -la ${NVM_DIR});
+RUN \. ${NVM_DIR}/nvm.sh;
+RUN nvm install {{ versions.node }};
+RUN nvm alias default {{ versions.node }};
+RUN nvm use default
+RUN chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR}
 # endregion
 {% endif -%}
