@@ -52,7 +52,7 @@ RUN apt update; \
     apt clean; \
     fc-cache -f -v; \
     python3 -m pip install pipx; \
-    python3 -m pipx install pre-commit;
+    python3 -m pip install pre-commit;
 
 RUN mkdir -p /workspace; \
     chown -R abc:abc /workspace; \
