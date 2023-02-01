@@ -13,11 +13,12 @@ ENV CONTAINER="jmuchovej/baseimage:${VERSION}"
 
 COPY . /
 
-ENV PYENV_ROOT "/usr/local/pyenv" \
-    NVM_DIR "/usr/local/nvm" \
-    R_HOME "/usr/local/R" \
-    JULIAUP_ROOT "/usr/local/juliaup" \
-    JULIA_DEPOT_PATH "/usr/local/julia:${JULIA_DEPOT_PATH}"
+ENV PYENV_ROOT="/usr/local/pyenv"
+ENV NVM_DIR="/usr/local/nvm"
+ENV R_HOME="/usr/local/R"
+ENV JULIAUP_ROOT="/usr/local/juliaup"
+ENV JULIA_DEPOT_PATH="/usr/local/julia:${JULIA_DEPOT_PATH}"
+ENV PATH="/usr/local/bin:${PATH}"
 
 # region Package installation & Directory setup
 USER root
