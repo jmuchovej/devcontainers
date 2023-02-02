@@ -42,11 +42,19 @@ RUN apt update; \
         rsync \
         tmux \
         unzip \
-        unzip \
         vim \
         wget \
         zip \
         zsh \
+        # Python requirements \
+        bzip2 \
+        build-essential \
+        libffi \
+        libssl-dev \
+        libreadline6 \
+        libreadline6-dev \
+        libssl-dev \
+        ncurses \
     ; \
     curl -fsSL https://starship.rs/install.sh | sh -s -- --yes; \
     rm -rf /var/lib/apt/lists/*; \
