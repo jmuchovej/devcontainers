@@ -62,10 +62,3 @@ RUN mkdir -p /workspace; \
     chmod -R 2775 /home/abc; \
     chown -R abc:abc /home/abc;
 # endregion
-
-RUN mkdir -p \ 
-        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \
-    chmod 2775 \
-        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}; \
-    chown -R abc:abc \
-        ${PYENV_ROOT} ${NVM_DIR} ${R_HOME} ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH};

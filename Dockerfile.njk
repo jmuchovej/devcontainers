@@ -17,8 +17,6 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pip install pipenv;
 RUN curl https://pyenv.run | bash;
-RUN rsync -av /tmp/pyenv/ ${PYENV_ROOT};
-RUN rm -rf /tmp/pyenv;
 RUN ${PYENV_ROOT}/bin/pyenv install {{ versions.python }} 
 RUN chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT}
 # endregion
@@ -30,7 +28,7 @@ ENV PATH="${JULIAUP_ROOT}/bin:${PATH}"
 RUN curl -fsSL https://install.julialang.org \
         | sh -s -- --yes --default-channel {{ versions.julia }};
 RUN rsync -av ${HOME}/.juliaup/ ${JULIAUP_ROOT};
-RUN chmod 2775 ${JULIAUP_ROOT} && chown -R abc:abc ${JULIAUP_ROOT}
+RUN chmod 2775 ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH} && chown -R abc:abc ${JULIAUP_ROOT} ${JULIA_DEPOT_PATH}
 # endregion
 {% endif %}
 
