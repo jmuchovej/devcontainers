@@ -49,12 +49,10 @@ RUN apt update; \
         # Python requirements \
         bzip2 \
         build-essential \
-        libffi \
+        libffi-dev \
+        libncurses-dev \
+        libreadline-dev \
         libssl-dev \
-        libreadline6 \
-        libreadline6-dev \
-        libssl-dev \
-        ncurses \
     ; \
     curl -fsSL https://starship.rs/install.sh | sh -s -- --yes; \
     rm -rf /var/lib/apt/lists/*; \
