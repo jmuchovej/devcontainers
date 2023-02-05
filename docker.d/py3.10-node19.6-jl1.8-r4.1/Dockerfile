@@ -16,7 +16,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pip install pipenv; \
     curl https://pyenv.run | bash; \
-    ${PYENV_ROOT}/bin/pyenv install 3.11.1; \
+    ${PYENV_ROOT}/bin/pyenv install 3.10.9; \
     chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT};
 # endregion
 
@@ -33,10 +33,10 @@ ENV PATH="${R_HOME}/bin:${PATH}"
 RUN mkdir -p ${R_HOME}; \
     apt update -yq; \
     apt install \
-        r-base=4.2.2-* \
-        r-base-dev=4.2.2-* \
-            r-base-core=4.2.2-* \
-        r-recommended=4.2.2-* \
+        r-base=4.1.3-* \
+        r-base-dev=4.1.3-* \
+            r-base-core=4.1.3-* \
+        r-recommended=4.1.3-* \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     apt clean; \

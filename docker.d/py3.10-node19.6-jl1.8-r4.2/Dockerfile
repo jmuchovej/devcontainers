@@ -16,7 +16,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pip install pipenv; \
     curl https://pyenv.run | bash; \
-    ${PYENV_ROOT}/bin/pyenv install 3.11.1; \
+    ${PYENV_ROOT}/bin/pyenv install 3.10.9; \
     chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT};
 # endregion
 
