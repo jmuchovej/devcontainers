@@ -20,5 +20,6 @@ RUN mkdir -p ${NVM_DIR}; \
     nvm install 19.6.0; \
     nvm alias default 19.6.0; \
     nvm use default; \
-    chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR};
+    chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR}; \
+    npm install -g pnpm
 # endregion

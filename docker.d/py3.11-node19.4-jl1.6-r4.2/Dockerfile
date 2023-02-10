@@ -16,7 +16,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pip install pipenv; \
     curl https://pyenv.run | bash; \
-    ${PYENV_ROOT}/bin/pyenv install 3.11.1; \
+    ${PYENV_ROOT}/bin/pyenv install 3.11.2; \
     chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT};
 # endregion
 
@@ -51,5 +51,6 @@ RUN mkdir -p ${NVM_DIR}; \
     nvm install 19.4.0; \
     nvm alias default 19.4.0; \
     nvm use default; \
-    chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR};
+    chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR}; \
+    npm install -g pnpm
 # endregion
