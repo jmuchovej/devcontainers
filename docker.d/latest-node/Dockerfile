@@ -17,8 +17,8 @@ ENV PATH="${NVM_DIR}/bin:${PATH}"
 RUN mkdir -p ${NVM_DIR}; \
     curl -fsSL -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | bash; \
     \. ${NVM_DIR}/nvm.sh; \
-    nvm install 19.6.0; \
-    nvm alias default 19.6.0; \
+    nvm install 19.6.1; \
+    nvm alias default 19.6.1; \
     nvm use default; \
     chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR}; \
     npm install -g pnpm
