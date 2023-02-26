@@ -23,7 +23,7 @@ RUN pip install pipenv; \
 # region Julia Setup
 ENV PATH="${JULIAUP_ROOT}/bin:${PATH}"
 RUN curl -fsSL https://install.julialang.org \
-        | sh -s -- --yes --default-channel 1.8.5; \
+        | sh -s -- --yes --default-channel 1.6.7; \
     rsync -av ${HOME}/.juliaup/ ${JULIAUP_ROOT}; \
     chmod 2775 ${JULIAUP_ROOT} ${JULIA_ROOT} && chown -R abc:abc ${JULIAUP_ROOT} ${JULIA_ROOT};
 # endregion

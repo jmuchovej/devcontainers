@@ -3,7 +3,7 @@
     "dockerTag": "latest",
     "versions": {
       "python": "3.11.2",
-      "node": "19.6.1",
+      "node": "19.7.0",
       "julia": "1.8.5",
       "rbase": "4.2.2"
     }
@@ -16,7 +16,7 @@
   },
   {
     "versions": {
-      "node": "19.6.1"
+      "node": "19.7.0"
     },
     "dockerTag": "latest-node"
   },
@@ -35,7 +35,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.8.5",
       "rbase": "4.2.2"
     },
@@ -44,7 +44,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "19.6.1",
+      "node": "19.7.0",
       "julia": "1.8.5",
       "rbase": "4.2.2"
     },
@@ -557,7 +557,7 @@
   {
     "versions": {
       "python": "3.10.10",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.6.7",
       "rbase": "4.1.3"
     },
@@ -566,7 +566,7 @@
   {
     "versions": {
       "python": "3.10.10",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.6.7",
       "rbase": "4.2.2"
     },
@@ -575,7 +575,7 @@
   {
     "versions": {
       "python": "3.10.10",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.8.5",
       "rbase": "4.1.3"
     },
@@ -584,7 +584,7 @@
   {
     "versions": {
       "python": "3.10.10",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.8.5",
       "rbase": "4.2.2"
     },
@@ -841,6 +841,42 @@
       "rbase": "4.2.2"
     },
     "dockerTag": "py3.10-node19.6-jl1.8-r4.2"
+  },
+  {
+    "versions": {
+      "python": "3.10.10",
+      "node": "19.7.0",
+      "julia": "1.6.7",
+      "rbase": "4.1.3"
+    },
+    "dockerTag": "py3.10-node19.7-jl1.6-r4.1"
+  },
+  {
+    "versions": {
+      "python": "3.10.10",
+      "node": "19.7.0",
+      "julia": "1.6.7",
+      "rbase": "4.2.2"
+    },
+    "dockerTag": "py3.10-node19.7-jl1.6-r4.2"
+  },
+  {
+    "versions": {
+      "python": "3.10.10",
+      "node": "19.7.0",
+      "julia": "1.8.5",
+      "rbase": "4.1.3"
+    },
+    "dockerTag": "py3.10-node19.7-jl1.8-r4.1"
+  },
+  {
+    "versions": {
+      "python": "3.10.10",
+      "node": "19.7.0",
+      "julia": "1.8.5",
+      "rbase": "4.2.2"
+    },
+    "dockerTag": "py3.10-node19.7-jl1.8-r4.2"
   },
   {
     "versions": {
@@ -1349,7 +1385,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.6.7",
       "rbase": "4.1.3"
     },
@@ -1358,7 +1394,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.6.7",
       "rbase": "4.2.2"
     },
@@ -1367,7 +1403,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.8.5",
       "rbase": "4.1.3"
     },
@@ -1376,7 +1412,7 @@
   {
     "versions": {
       "python": "3.11.2",
-      "node": "18.14.1",
+      "node": "18.14.2",
       "julia": "1.8.5",
       "rbase": "4.2.2"
     },
@@ -1633,5 +1669,41 @@
       "rbase": "4.2.2"
     },
     "dockerTag": "py3.11-node19.6-jl1.8-r4.2"
+  },
+  {
+    "versions": {
+      "python": "3.11.2",
+      "node": "19.7.0",
+      "julia": "1.6.7",
+      "rbase": "4.1.3"
+    },
+    "dockerTag": "py3.11-node19.7-jl1.6-r4.1"
+  },
+  {
+    "versions": {
+      "python": "3.11.2",
+      "node": "19.7.0",
+      "julia": "1.6.7",
+      "rbase": "4.2.2"
+    },
+    "dockerTag": "py3.11-node19.7-jl1.6-r4.2"
+  },
+  {
+    "versions": {
+      "python": "3.11.2",
+      "node": "19.7.0",
+      "julia": "1.8.5",
+      "rbase": "4.1.3"
+    },
+    "dockerTag": "py3.11-node19.7-jl1.8-r4.1"
+  },
+  {
+    "versions": {
+      "python": "3.11.2",
+      "node": "19.7.0",
+      "julia": "1.8.5",
+      "rbase": "4.2.2"
+    },
+    "dockerTag": "py3.11-node19.7-jl1.8-r4.2"
   }
 ]

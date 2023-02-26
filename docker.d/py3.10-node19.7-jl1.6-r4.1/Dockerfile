@@ -16,14 +16,14 @@ ENV PATH="/usr/local/bin:${PATH}"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 RUN pip install pipenv; \
     curl https://pyenv.run | bash; \
-    ${PYENV_ROOT}/bin/pyenv install 3.11.2; \
+    ${PYENV_ROOT}/bin/pyenv install 3.10.10; \
     chmod 2775 ${PYENV_ROOT} && chown -R abc:abc ${PYENV_ROOT};
 # endregion
 
 # region Julia Setup
 ENV PATH="${JULIAUP_ROOT}/bin:${PATH}"
 RUN curl -fsSL https://install.julialang.org \
-        | sh -s -- --yes --default-channel 1.8.5; \
+        | sh -s -- --yes --default-channel 1.6.7; \
     rsync -av ${HOME}/.juliaup/ ${JULIAUP_ROOT}; \
     chmod 2775 ${JULIAUP_ROOT} ${JULIA_ROOT} && chown -R abc:abc ${JULIAUP_ROOT} ${JULIA_ROOT};
 # endregion
@@ -33,10 +33,10 @@ ENV PATH="${R_HOME}/bin:${PATH}"
 RUN mkdir -p ${R_HOME}; \
     apt update -yq; \
     apt install \
-        r-base=4.2.2-* \
-        r-base-dev=4.2.2-* \
-            r-base-core=4.2.2-* \
-        r-recommended=4.2.2-* \
+        r-base=4.1.3-* \
+        r-base-dev=4.1.3-* \
+            r-base-core=4.1.3-* \
+        r-recommended=4.1.3-* \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     apt clean; \
