@@ -1,0 +1,40 @@
+{
+	//* https://hub.docker.com/_/microsoft-vscode-devcontainers#:~:text=arm64,support
+	//*   Microsoft says there's some issue with `libssl` on ARM64, so `buster` and
+	//*   `ubuntu 20.04` can't be used. Thus, we need to specify `bullseye` since 
+	//*   there's no named tag for Ubuntu variants.
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {
+			"installZsh": true,
+			"configureZshAsDefaultShell": true,
+			"nonFreePackages": true
+		},
+		"ghcr.io/devcontainers/features/github-cli": {},
+        "ghcr.io/devcontainers/features/docker-in-docker": {},
+        "ghcr.io/devcontainers/features/python": {
+			"installJupyterlab": true
+		}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+				"dbaumer.vscode-eslint",
+				"aaron-bond.better-comments",
+				"bungcip.better-toml",
+				"ms-azuretools.vscode-docker",
+				"mikestead.dotenv",
+				"julialang.language-julia",
+				"ronnidc.nunjucks",
+				"ms-python.python",
+				"vscodevim.vim",
+				"REditorSupport.r",
+				"redhat.vscode-yaml",
+				"cschleiden.vscode-github-actions",
+				"shardulm94.trailing-spaces",
+				"stkb.rewrap"
+			]
+        }
+    },
+    "postCreateCommand": "npm install -g @devcontainers/cli"
+}
