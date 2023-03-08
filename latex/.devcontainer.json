@@ -25,8 +25,13 @@
                 "latex-workshop.latex.clean.subfolder.enabled": true,
                 "latex-workshop.latex.recipes": [
                     {
-                        "name": "lualatex -> biber -> lualatex * 2",
-                        "tools": ["lualatex", "biber", "lualatex", "lualatex"]
+                        "name": "${{ templateOption.latexEngine }} -> biber -> ${{ templateOption.latexEngine }}* 2",
+                        "tools": [
+                            "${{ templateOption.latexEngine }}",
+                            "biber",
+                            "${{ templateOption.latexEngine }}",
+                            "${{ templateOption.latexEngine }}",
+                        ]
                     },
                     {
                         "name": "latexmk",
@@ -35,14 +40,14 @@
                 ],
                 "latex-workshop.latex.tools": [
                     {
-                        "name": "lualatex",
+                        "name": "${{ templateOption.latexEngine }}",
                         "command": "latexmk",
                         "args": [
                             "--shell-escape",
                             "-synctex=1",
                             "-interaction=nonstopmode",
                             "-file-line-error",
-                            "-lualatex",
+                            "-${{ templateOption.latexEngine }}",
                             "%DOC%"
                         ]
                     },
@@ -70,7 +75,7 @@
                 // endregion
                 // region latexindent
                 "latex-workshop.latexindent.enabled": true,
-                //* This needs to be left as the command because the installation 
+                //* This needs to be left as the command because the installation
                 //*   location varies across architecture builds
                 "latex-workshop.latexindent.exec.path": "latexindent",
                 "latex-workshop.latexindent.args": [
@@ -81,7 +86,7 @@
                 "latex-workshop.synctex.afterBuild.enabled": true
                 // endregion
             }
-        } 
+        }
     },
     "features": {
         "ghcr.io/devcontainers/features/common-utils": {
@@ -89,5 +94,6 @@
             "username": "vscode",
             "upgradePackages": true
         }
-    }
+    },
+    "postStartCommand": "tlmgr install ${{ templateOption.latexEngine }}"
 }
