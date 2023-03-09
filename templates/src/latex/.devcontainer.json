@@ -1,0 +1,99 @@
+{
+    "image": "ghcr.io/jmuchovej/latex-devcontainer:latest",
+    "name": "LaTeX",
+    // "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // LaTeX Workshop, goes without saying.
+                "james-yu.latex-workshop",
+                // Colorful comments based ensuring character
+				"aaron-bond.better-comments",
+                // vim keybindings for VSCode
+				"vscodevim.vim",
+                // Useful extensions for dev experience
+                "shardulm94.trailing-spaces",  // Highlights straight whitespace
+                "stkb.rewrap"  // Enables word-wrap on comments
+            ],
+            "settings": {
+                "files.eol": "\n",
+                "editor.formatOnSave": true,
+                "files.associations": {
+                    "*.tex": "latex"
+                },
+                "latex-workshop.latex.autoClean.run": "onBuilt",
+                "latex-workshop.latex.clean.subfolder.enabled": true,
+                "latex-workshop.latex.recipes": [
+                    {
+                        "name": "${{ templateOption.latexEngine }} -> biber -> ${{ templateOption.latexEngine }}* 2",
+                        "tools": [
+                            "${{ templateOption.latexEngine }}",
+                            "biber",
+                            "${{ templateOption.latexEngine }}",
+                            "${{ templateOption.latexEngine }}",
+                        ]
+                    },
+                    {
+                        "name": "latexmk",
+                        "tools": ["latexmk"]
+                    }
+                ],
+                "latex-workshop.latex.tools": [
+                    {
+                        "name": "${{ templateOption.latexEngine }}",
+                        "command": "latexmk",
+                        "args": [
+                            "--shell-escape",
+                            "-synctex=1",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "-${{ templateOption.latexEngine }}",
+                            "%DOC%"
+                        ]
+                    },
+                    {
+                        "name": "biber",
+                        "command": "biber",
+                        "args": [ "%DOCFILE%" ]
+                    },
+                    {
+                        "name": "latexmk",
+                        "command": "latexmk",
+                        "args": [
+                            "-synctex=1",
+                            "-interaction=nonstopmode",
+                            "-file-line-error",
+                            "-pdf",
+                            "-outdir=%OUTDIR%",
+                            "%DOC%"
+                        ]
+                    }
+                ],
+                // region chktex
+                "latex-workshop.linting.chktex.enabled": true,
+                "latex-workshop.linting.chktex.exec.path": "/usr/local/bin/chktex",
+                // endregion
+                // region latexindent
+                "latex-workshop.latexindent.enabled": true,
+                //* This needs to be left as the command because the installation
+                //*   location varies across architecture builds
+                "latex-workshop.latexindent.exec.path": "latexindent",
+                "latex-workshop.latexindent.args": [
+                    "-c", "%DIR%/", "%TMPFILE%", "-y=defaultIndent: '%INDENT%'"
+                ],
+                // endregion
+                // region syntex
+                "latex-workshop.synctex.afterBuild.enabled": true
+                // endregion
+            }
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {
+            "installZsh": true,
+            "username": "vscode",
+            "upgradePackages": true
+        }
+    },
+    "postStartCommand": "tlmgr install ${{ templateOption.latexEngine }}"
+}
