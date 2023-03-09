@@ -3,7 +3,7 @@ name: "Build and publish LaTeX devcontainer to ghcr.io"
 on:
   push:
     paths:
-      - "latex/Dockerfile"
+      - "templates/src/latex/Dockerfile"
       - ".github/workflows/build-latex-devcontainer.yaml"
   workflow_dispatch:
 
