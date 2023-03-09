@@ -1,0 +1,54 @@
+{
+    "on-ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "asdf": {
+                "version": "latest"
+            }
+        }
+    },
+    "on-alpine": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "asdf": {
+                "version": "latest"
+            }
+        }
+    },
+    "with-v0.11.2": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "asdf": {
+                "version": "v0.11.2"
+            }
+        }
+    },
+    "with-v0.10.2": {
+        "image": "mcr.microsoft.com/devcontainers/base:alpine",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "asdf": {
+                "version": "v0.10.2"
+            }
+        }
+    }
+}

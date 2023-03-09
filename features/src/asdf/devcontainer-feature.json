@@ -1,0 +1,26 @@
+{
+    "id": "asdf",
+    "version": "0.1.0",
+    "name": "asdf",
+    "documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/features/asdf",
+    "description": "Installs asdf",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "develop",
+                "latest"
+            ],
+            "default": "latest",
+            "description": "Select (or enter) the version of asdf you want to install."
+        }
+    },
+    "containerEnv": {
+        "ASDF_DIR": "/opt/asdf-vm"
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/git",
+        "ghcr.io/devcontainers/features/github-cli",
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "asdf": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "asdf": {
+                "version": "latest"
+            }
+        }
+    }
+}
