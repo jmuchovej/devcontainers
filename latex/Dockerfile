@@ -6,7 +6,7 @@ ARG VARIANT="kinetic"
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
-ARG CHKTEX_VERSION=1.7.6
+ARG CHKTEX_VERSION=1.7.8
 ARG CHKTEX_MIRROR="http://download.savannah.gnu.org/releases/chktex"
 
 WORKDIR /tmp/chktex-builder
