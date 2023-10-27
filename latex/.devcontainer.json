@@ -1,5 +1,5 @@
 {
-    "image": "ghcr.io/jmuchovej/latex-devcontainer:latest",
+    "image": "ghcr.io/jmuchovej/latex-devcontainer:main",
     "name": "LaTeX devcontainer",
     "workspaceFolder": "/workspace",
     "customizations": {
