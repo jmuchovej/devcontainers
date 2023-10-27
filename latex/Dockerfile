@@ -46,7 +46,7 @@ LABEL org.opencontainers.image.source \
 ARG SCHEME="scheme-basic"
 ARG DOCFILES=0
 ARG SRCFILES=0
-ARG TEXLIVE_VERSION=2022
+ARG TEXLIVE_VERSION=2023
 ARG TEXLIVE_MIRROR="https://mirror.ctan.org/systems/texlive/tlnet"
 ARG DEBIAN_FRONTEND="noninteractive"
 
