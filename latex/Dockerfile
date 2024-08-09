@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.5
 #! Dockerfile syntax can be retrieved from https://hub.docker.com/r/docker/dockerfile
 
-FROM --platform=${TARGETARCH} docker.io/library/buildpack-deps:kinetic-scm as chktex-builder
-ARG VARIANT="kinetic"
+FROM --platform=${TARGETARCH} docker.io/library/buildpack-deps:jammy-scm as chktex-builder
+ARG VARIANT="jammy"
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
@@ -29,8 +29,8 @@ EOF
 #* Use the `kinetic` variant of `buildpack-deps` as the base image, since it includes 
 #*   common tools, libraries, and programming languages like `git`, `gcc`, `openssl`, 
 #*   `python`, `node`, `julia`, and `R`.
-FROM --platform=${TARGETPLATFORM} docker.io/library/buildpack-deps:kinetic-scm
-ARG VARIANT="kinetic"
+FROM --platform=${TARGETPLATFORM} docker.io/library/buildpack-deps:jammy-scm
+ARG VARIANT="jammy"
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
