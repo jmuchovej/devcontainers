@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1.5
 #! Dockerfile syntax can be retrieved from https://hub.docker.com/r/docker/dockerfile
 
-FROM --platform=${TARGETARCH} docker.io/library/buildpack-deps:kinetic-scm as chktex-builder
-ARG VARIANT="kinetic"
+ARG VARIANT="jammy"
+FROM --platform=${TARGETARCH} docker.io/library/buildpack-deps:${VARIANT}-scm as chktex-builder
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
-ARG CHKTEX_VERSION=1.7.6
+ARG CHKTEX_VERSION=1.7.8
 ARG CHKTEX_MIRROR="http://download.savannah.gnu.org/releases/chktex"
 
 WORKDIR /tmp/chktex-builder
@@ -29,8 +29,8 @@ EOF
 #* Use the `kinetic` variant of `buildpack-deps` as the base image, since it includes 
 #*   common tools, libraries, and programming languages like `git`, `gcc`, `openssl`, 
 #*   `python`, `node`, `julia`, and `R`.
-FROM --platform=${TARGETPLATFORM} docker.io/library/buildpack-deps:kinetic-scm
-ARG VARIANT="kinetic"
+ARG VARIANT="jammy"
+FROM --platform=${TARGETPLATFORM} docker.io/library/buildpack-deps:${VARIANT}-scm
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
@@ -46,7 +46,7 @@ LABEL org.opencontainers.image.source \
 ARG SCHEME="scheme-basic"
 ARG DOCFILES=0
 ARG SRCFILES=0
-ARG TEXLIVE_VERSION=2022
+ARG TEXLIVE_VERSION=2023
 ARG TEXLIVE_MIRROR="https://mirror.ctan.org/systems/texlive/tlnet"
 ARG DEBIAN_FRONTEND="noninteractive"
 
