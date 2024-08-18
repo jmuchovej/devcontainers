@@ -33,10 +33,10 @@ ENV PATH="${R_HOME}/bin:${PATH}"
 RUN mkdir -p ${R_HOME}; \
     apt update -yq; \
     apt install \
-        r-base=4.2.2-* \
-        r-base-dev=4.2.2-* \
-            r-base-core=4.2.2-* \
-        r-recommended=4.2.2-* \
+        r-base=4.2.3-* \
+        r-base-dev=4.2.3-* \
+            r-base-core=4.2.3-* \
+        r-recommended=4.2.3-* \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     apt clean; \
@@ -48,8 +48,8 @@ ENV PATH="${NVM_DIR}/bin:${PATH}"
 RUN mkdir -p ${NVM_DIR}; \
     curl -fsSL -o- https://github.com/nvm-sh/nvm/raw/master/install.sh | bash; \
     \. ${NVM_DIR}/nvm.sh; \
-    nvm install 19.7.0; \
-    nvm alias default 19.7.0; \
+    nvm install 19.8.1; \
+    nvm alias default 19.8.1; \
     nvm use default; \
     chmod 2775 ${NVM_DIR} && chown -R abc:abc ${NVM_DIR}; \
     npm install -g pnpm

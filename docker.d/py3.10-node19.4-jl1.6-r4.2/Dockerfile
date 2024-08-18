@@ -33,10 +33,10 @@ ENV PATH="${R_HOME}/bin:${PATH}"
 RUN mkdir -p ${R_HOME}; \
     apt update -yq; \
     apt install \
-        r-base=4.2.2-* \
-        r-base-dev=4.2.2-* \
-            r-base-core=4.2.2-* \
-        r-recommended=4.2.2-* \
+        r-base=4.2.3-* \
+        r-base-dev=4.2.3-* \
+            r-base-core=4.2.3-* \
+        r-recommended=4.2.3-* \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     apt clean; \
