@@ -1,0 +1,26 @@
+engines:
+  node: ">=18"
+  pnpm: ">=7"
+
+scripts:
+  get-versions: "node ./versions.d/get-versions.mjs"
+  compute-versions: "node ./versions.d/compute-versions.mjs"
+  commitlint: "commitlint --edit"
+  format: "biome format --write"
+  lint: "biome lint"
+
+dependencies:
+  axios: "^1.2.3"
+  lodash-es: "^4.17.21"
+  nunjucks: "^3.2.3"
+  semver: "^7.3.8"
+  strip-json-comments: "^5.0.0"
+  yargs: "^17.6.2"
+
+devDependencies:
+  "@biomejs/biome": "^1.8.3"
+  "@commitlint/cli": "^19.4.0"
+  "@commitlint/config-conventional": "^19.2.2"
+
+commitlint:
+  extends: [ "@commitlint/config-conventional" ]
