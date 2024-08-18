@@ -1,3 +1,7 @@
+.DS_Store
+.env
+
+# Don't track Node dependencies
 .pnpm-store/
 node_modules/
 
