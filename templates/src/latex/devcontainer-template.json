@@ -1,19 +1,25 @@
 {
-    "id": "latex",
-    "version": "1.0.0",
-    "name": "LaTeX devcontainer",
-    "description": "LaTeX Devcontainer with customizable LaTeX engine.",
-    "documentationURL": "https://github.com/jmuchovej/containers/tree/main/templates/latex/",
-    "publisher": "John Muchovej <latex-devcontainer.tro05@simplelogin.com>",
-    "licenseURL": "https://github.com/jmuchovej/containers/tree/main/LICENSE",
-    "platforms": ["Any"],
-    "keywords": ["latex", "xelatex", "lualatex", "pdftex"],
-    "options": {
-        "latexEngine": {
-            "type": "string",
-            "description": "Which LaTeX Engine to use",
-            "enum": ["xetex", "luatex", "pdftex"],
-            "default": "xetex"
-        }
-    }
+	"id": "latex",
+	"version": "1.1.0",
+	"name": "LaTeX devcontainer",
+	"description": "LaTeX Devcontainer with customizable LaTeX engine.",
+	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/",
+	"publisher": "John Muchovej <jmuchovej@users.noreply.github.com>",
+	"licenseURL": "https://github.com/jmuchovej/containers/tree/main/LICENSE",
+	"platforms": ["Any"],
+	"keywords": ["latex", "xelatex", "lualatex", "pdftex"],
+	"options": {
+		"texlive": {
+			"type": "string",
+			"description": "Which version of TexLive do you want to use?",
+			"enum": ["2022", "2023", "2024", "latest"],
+			"default": "latest"
+		},
+		"latexEngine": {
+			"type": "string",
+			"description": "Which LaTeX Engine to use",
+			"enum": ["xetex", "luatex", "pdftex"],
+			"default": "xetex"
+		}
+	}
 }
