@@ -1,0 +1,19 @@
+{
+	"id": "typst",
+	"version": "1.0.0",
+	"name": "Typst Dev Container",
+	"description": "Write your Typst documents in a Dev Container!",
+	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/typst/",
+	"publisher": "John Muchovej <jmuchovej@users.noreply.github.com>",
+	"licenseURL": "https://github.com/jmuchovej/devcontainers/tree/main/LICENSE",
+	"platforms": ["Any"],
+	"keywords": ["typst"],
+	"options": {
+		"texlive": {
+			"type": "string",
+			"description": "Which version of Typst?",
+			"enum": ["0.10.0", "0.11.0", "0.11.1", "latest"],
+			"default": "latest"
+		}
+	}
+}
