@@ -9,7 +9,7 @@
 	"platforms": ["Any"],
 	"keywords": ["typst"],
 	"options": {
-		"texlive": {
+		"typst": {
 			"type": "string",
 			"description": "Which version of Typst?",
 			"enum": ["0.11.0", "0.11.1", "latest"],
