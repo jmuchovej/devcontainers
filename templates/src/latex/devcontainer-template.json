@@ -5,7 +5,7 @@
 	"description": "LaTeX Devcontainer with customizable LaTeX engine.",
 	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/",
 	"publisher": "John Muchovej <jmuchovej@users.noreply.github.com>",
-	"licenseURL": "https://github.com/jmuchovej/containers/tree/main/LICENSE",
+	"licenseURL": "https://github.com/jmuchovej/devcontainers/tree/main/LICENSE",
 	"platforms": ["Any"],
 	"keywords": ["latex", "xelatex", "lualatex", "pdftex"],
 	"options": {

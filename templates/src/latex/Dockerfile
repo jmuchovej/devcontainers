@@ -99,13 +99,6 @@ ENV DEBIAN_FRONTEND="noninteractive"
 ARG TEXDIR
 ARG TEXUSERDIR
 
-LABEL org.opencontainers.image.authors "John Muchovej <jmuchovej@users.noreply.github.com>"
-LABEL org.opencontainers.image.url "https://github.com/jmuchovej/devcontainers"
-LABEL org.opencontainers.image.documentation \
-    "https://github.com/jmuchovej/devcontainers/blob/main/src/templates/latex/README.md"
-LABEL org.opencontainers.image.source \
-    "https://github.com/jmuchovej/containers/tree/main/src/templates/latex"
-
 #! Set environment variables
 ENV LANG="en_US.UTF-8"
 ENV LANGUAGE="en_US.UTF-8"

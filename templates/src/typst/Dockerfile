@@ -30,13 +30,6 @@ RUN cargo build --release
 #region Output Stage ####################################################################
 FROM mcr.microsoft.com/devcontainers/rust:${VARIANT} as output
 
-LABEL org.opencontainers.image.authors "John Muchovej <jmuchovej@users.noreply.github.com>"
-LABEL org.opencontainers.image.url "https://github.com/jmuchovej/devcontainers/tree/main/src/templates/typst"
-LABEL org.opencontainers.image.documentation \
-    "https://github.com/jmuchovej/devcontainers/blob/main/src/templates/typst/README.md"
-LABEL org.opencontainers.image.source \
-    "https://github.com/jmuchovej/devcontainers"
-
 COPY --from=typst-builder /typst/target/release/typst /usr/local/bin/typst
 # TODO add support for Typestyle (directly within the container)!
 # COPY --from=typstyle-builder /typst/target/release/typstyle /usr/local/bin/typstyle
