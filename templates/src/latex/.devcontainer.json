@@ -1,5 +1,5 @@
 {
-  "image": "ghcr.io/jmuchovej/latex-devcontainer:${templateOption:texlive}",
+  "image": "ghcr.io/jmuchovej/devcontainers/latex:${templateOption:texlive}",
   "name": "LaTeX",
   // "workspaceFolder": "/workspace",
   "customizations": {
