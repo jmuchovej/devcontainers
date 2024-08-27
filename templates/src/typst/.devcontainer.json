@@ -1,34 +1,34 @@
 {
-    "image": "ghcr.io/jmuchovej/latex-devcontainer:${templateOption:typst}",
-    "name": "Typst",
-    // "workspaceFolder": "/workspace",
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          // Typst LSP and renderer.
-          "myriad-dreamin.tinymist",
-          // Useful extensions for dev experience
-          "shardulm94.trailing-spaces", // Highlights straight whitespace
-          "stkb.rewrap" // Enables word-wrap on comments
-        ],
-        "settings": {
-          "files.eol": "\n",
-          "editor.formatOnSave": true,
-          "[typst]": {
-            "editor.formatOnSave": true
-          },
-          "tinymist.formatterMode": "typstyle",
-          "files.associations": {
-            "*.typ": "typst"
-          },
-        }
+  "image": "ghcr.io/jmuchovej/devcontainers/typst:${templateOption:typst}",
+  "name": "Typst",
+  // "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Typst LSP and renderer.
+        "myriad-dreamin.tinymist",
+        // Useful extensions for dev experience
+        "shardulm94.trailing-spaces", // Highlights straight whitespace
+        "stkb.rewrap" // Enables word-wrap on comments
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true,
+        "[typst]": {
+          "editor.formatOnSave": true
+        },
+        "tinymist.formatterMode": "typstyle",
+        "files.associations": {
+          "*.typ": "typst"
+        },
       }
-    },
-    "features": {
-      "ghcr.io/devcontainers/features/common-utils": {
-        "installZsh": true,
-        "username": "vscode",
-        "upgradePackages": true
-      }
-    },
-  }
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "installZsh": true,
+      "username": "vscode",
+      "upgradePackages": true
+    }
+  },
+}

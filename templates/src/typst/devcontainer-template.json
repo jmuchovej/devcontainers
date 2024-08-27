@@ -12,7 +12,7 @@
 		"texlive": {
 			"type": "string",
 			"description": "Which version of Typst?",
-			"enum": ["0.10.0", "0.11.0", "0.11.1", "latest"],
+			"enum": ["0.11.0", "0.11.1", "latest"],
 			"default": "latest"
 		}
 	}
