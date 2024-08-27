@@ -12,9 +12,10 @@ jobs:
       - name: "Publish Templates"
         uses: devcontainers/action@v1
         with:
-          publish-templates: "true"
+          publish-templates: true
           base-path-to-templates: "./templates/src"
-          generate-docs: "true"
+          generate-docs: true
+          templates-namespace: "jmuchovej/templates"
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

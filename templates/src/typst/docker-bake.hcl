@@ -25,7 +25,7 @@ group "default" {
 
 repo = "https://github.com/jmuchovej/devcontainers"
 template = "${repo}/tree/main/src/templates/typst"
-iamge = "ghcr.io/jmuchovej/devcontainers/typst"
+image = "ghcr.io/jmuchovej/devcontainers/typst"
 
 target "typst" {
   matrix = {
