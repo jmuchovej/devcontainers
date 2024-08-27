@@ -1,52 +1,54 @@
 //! How to edit this file:
-// 1. In the `default` group (below), you should append `texlive-????` where `????` is
-//    the year you're adding.
-// 2. You should copy the most recent `target` block and take care to update:
-//    1. `TYPST_VERSION`
-//       https://github.com/typst/typst/releases
-//    2. `VARIANT` <-- Use the latest Debian, but prefix with Rust major version!
-//       Cmd+F "rust-version" in https://github.com/typst/typst/blob/main/Cargo.toml
+//! In the `matrix` component of the `target: "typst"` block, prepend a new object
+//!   with keys `{ typst = ????, typstyle = ????, variant = ????}`, then update the
+//!   `variable "LATEST"` block to a default value matching this new entry!
+// What the variables in the object you're adding refer to!
+//   1. `typst` <-- this is the year of TeXLive we're building!
+//      Releases here: https://github.com/typst/typst/releases/latest
+//   2. `typstyle` <-- this is the version of `typstyle` to build
+//      Releases here: http://github.com/Enter-tainer/typstyle/releases/latest
+//   3. `variant` <-- this is based on what `mcr.microsoft.com` publishes as the latest
+//      variant of Rust! see more:
+//      https://mcr.microsoft.com/en-us/product/devcontainers/rust/about#using_this_image
+//*     NOTE: this should be the latest Debian **prefixed with the _major version_**
+//*     found in typst's `Cargo.toml`!
+//*     Cmd+F "rust-version" in https://github.com/typst/typst/blob/main/Cargo.toml
+
+variable "LATEST" {
+  type = string
+  default = "0.11.1"
+}
 
 group "default" {
-    targets = [
-        "typst-v0-11-1",
-        "typst-v0-11-0",
-    ]
+  targets = [ "typst" ]
 }
 
-target "shared" {
-    context = "./"
-    dockerfile = "Dockerfile"
-    platforms = [ "linux/amd64", "linux/arm64", ]
-}
+repo = "https://github.com/jmuchovej/devcontainers"
+template = "${repo}/tree/main/src/templates/typst"
+iamge = "ghcr.io/jmuchovej/devcontainers/typst"
 
-target "typst-v0-11-1" {
-    inherits = ["shared"]
-    args = {
-        TYPST_VERSION = "v0.11.1"
-        TYPSTYLE_VERSION = "v0.11.32"
-        VARIANT = "1-bookworm"
-    }
-    labels = {
-        "org.opencontainers.image.title" = "Typst v0.11.1"
-    }
-    tags = [
-        "ghcr.io/jmuchovej/typst-devcontainer:0.11.1",
-        "ghcr.io/jmuchovej/typst-devcontainer:latest",
+target "typst" {
+  matrix = {
+    item = [
+      {typst = "0.11.1", typstyle = "0.11.32", variant = "1-bookworm", },
+      {typst = "0.11.0", typstyle = "0.11.20", variant = "1-bookworm", },
     ]
-}
-
-target "typst-v0-11-0" {
-    inherits = ["shared"]
-    args = {
-        TYPST_VERSION = "v0.11.0"
-        TYPSTYLE_VERSION = "v0.11.20"
-        VARIANT = "1-bookworm"
-    }
-    labels = {
-        "org.opencontainers.image.title" = "Typst v0.11.0"
-    }
-    tags = [
-        "ghcr.io/jmuchovej/typst-devcontainer:0.11.0",
-    ]
+  }
+  name = "typst-v${replace(item.typst, ".", "-")}"
+  context = "./"
+  dockerfile = "Dockerfile"
+  platforms = [ "linux/amd64", "linux/arm64", ]
+  args = {
+    VARIANT = item.variant
+    TYPST_VERSION = "v${item.typst}"
+    TYPSTYLE_VERSION = "v${item.typstyle}"
+  }
+  labels = {
+    "org.opencontainers.image.source" = repo
+    "org.opencontainers.image.authors" = "John Muchovej <jmuchovej@pm.me>"
+    "org.opencontainers.image.url" = "${template}"
+    "org.opencontainers.image.documentation" = "${template}/README.md"
+    "org.opencontainers.image.title" = "Typst v${item.typst}"
+  }
+  tags = [ "${image}:${item.typst}", LATEST == item.typst ? "${image}:latest" : "", ]
 }
