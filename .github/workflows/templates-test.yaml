@@ -13,6 +13,7 @@ jobs:
         with:
           filters: |
             latex: ./templates/**/latex/**
+            typst: ./templates/**/typst/**
 
   test:
     needs: [detect-changes]
