@@ -1,8 +1,8 @@
 {
 	"id": "latex",
-	"version": "1.1.0",
-	"name": "LaTeX devcontainer",
-	"description": "LaTeX Devcontainer with customizable LaTeX engine.",
+	"version": "1.1.1",
+	"name": "LaTeX Dev Container",
+	"description": "Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)",
 	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/",
 	"publisher": "John Muchovej <jmuchovej@users.noreply.github.com>",
 	"licenseURL": "https://github.com/jmuchovej/devcontainers/tree/main/LICENSE",

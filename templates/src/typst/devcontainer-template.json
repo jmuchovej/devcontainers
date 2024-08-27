@@ -1,6 +1,6 @@
 {
 	"id": "typst",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"name": "Typst Dev Container",
 	"description": "Write your Typst documents in a Dev Container!",
 	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/typst/",
