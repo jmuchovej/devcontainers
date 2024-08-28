@@ -1,6 +1,10 @@
-name: "CI - Test Templates"
+name: "Templates: Test (CI)"
+
 on:
   pull_request:
+    paths:
+      - "./templates/**"
+      - "./github/workflows/templates-test.yaml"
 
 jobs:
   detect-changes:

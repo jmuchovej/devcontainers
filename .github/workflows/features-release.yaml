@@ -1,4 +1,4 @@
-name: "Release dev container features & Generate Documentation"
+name: "Features: Release & Generate Documentation"
 
 on:
   workflow_dispatch:
@@ -21,6 +21,7 @@ jobs:
           publish-features: "true"
           base-path-to-features: "./features/src"
           generate-docs: "true"
+          templates-namespace: "jmuchovej/features"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
