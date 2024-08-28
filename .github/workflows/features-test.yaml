@@ -1,9 +1,13 @@
-name: "CI - Test Features"
+name: "Features: Test (CI)"
+
 on:
   push:
     branches:
       - main
   pull_request:
+    paths:
+      - "./features/**"
+      - "./github/workflows/features-test.yaml"
   workflow_dispatch:
 
 jobs:

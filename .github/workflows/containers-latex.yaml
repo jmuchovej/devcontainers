@@ -1,14 +1,15 @@
-name: "Build and publish LaTeX devcontainer to ghcr.io"
+name: "LaTeX: Build & Publish to ghcr.io"
 
 on:
   push:
     paths:
       - "templates/src/latex/Dockerfile"
       - "templates/src/latex/docker-bake.hcl"
-      - ".github/workflows/build-latex-devcontainer.yaml"
+      - ".github/workflows/containers-latex.yaml"
   workflow_dispatch:
   schedule:
-    - cron: "0 2 1 4 *"  # historically, TeXLive has been published around March
+    # historically, TeXLive has been published around March
+    - cron: "0 2 1 4 *"
 
 jobs:
   build-push-latex:

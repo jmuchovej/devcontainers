@@ -1,4 +1,5 @@
-name: "Release Dev Container Templates & Generate Documentation"
+name: "Templates: Release & Generate Documentation"
+
 on:
   workflow_dispatch:
 
