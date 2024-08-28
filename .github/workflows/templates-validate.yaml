@@ -1,0 +1,20 @@
+name: "Templates: Validate (devcontainer-template.json) (CI)"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "./templates/src/**/devcontainer-template.json"
+      - "./.github/workflows/templates-validate.yaml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Validate `**/devcontainer-template.json`"
+        uses: devcontainers/action@v1
+        with:
+          validate-only: "true"
+          base-path-to-features: "./templates/src"

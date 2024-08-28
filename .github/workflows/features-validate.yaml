@@ -1,14 +1,17 @@
-name: "Validate devcontainer-feature.json files"
+name: "Features: Validate (devcontainer-feature.json) (CI)"
 
 on:
   workflow_dispatch:
   pull_request:
+    paths:
+      - "./features/src/**/devcontainer-feature.json"
+      - "./.github/workflows/features-validate.yaml"
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: "Validate `**/devcontainer-feature.json`"
         uses: devcontainers/action@v1

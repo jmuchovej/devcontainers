@@ -1,4 +1,4 @@
-name: "Build and publish Typst devcontainer to ghcr.io"
+name: "Typst: Build & Publish to ghcr.io"
 
 on:
   push:
@@ -7,8 +7,6 @@ on:
       - "templates/src/typst/docker-bake.hcl"
       - ".github/workflows/containers-typst.yaml"
   workflow_dispatch:
-  schedule:
-    - cron: "0 2 1 4 *"  # historically, TeXLive has been published around March
 
 jobs:
   build-push-typst:
