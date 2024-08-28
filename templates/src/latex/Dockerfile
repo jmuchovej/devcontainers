@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.5
+# syntax=docker/dockerfile:1.9
 #! Dockerfile syntax can be retrieved from https://hub.docker.com/r/docker/dockerfile
 #* Use a variant of `buildpack-deps` which includes commont tools, libraries, and
 #*   programming languages like `git`, `gcc`, `openssl`, `python`, `node`, and `julia`.
