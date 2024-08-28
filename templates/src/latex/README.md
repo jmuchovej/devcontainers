@@ -1,7 +1,7 @@
 
-# LaTeX devcontainer (latex)
+# LaTeX Dev Container (latex)
 
-LaTeX Devcontainer with customizable LaTeX engine.
+Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)
 
 ## Options
 
