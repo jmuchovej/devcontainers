@@ -1,15 +1,73 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": [
-        "config:recommended",
-        "docker:enableMajor",
-        ":dependencyDashboard",
-        ":disableRateLimiting",
-        ":timezone(America/New_York)",
-        ":semanticCommits",
-    ],
-    "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-    "suppressNotifications": [
-        "prEditedNotification", "prIgnoreNotification",
-    ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "docker:enableMajor",
+    ":dependencyDashboard",
+    ":disableRateLimiting",
+    ":timezone(America/New_York)",
+    ":semanticCommits",
+
+  ],
+  // "schedule": ["every weekend"],
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": [ "prEditedNotification", "prIgnoreNotification", ],
+
+  "packageRules": [
+    //! don't update Dockerfile unless their primary dependencies change! (i.e., LaTeX, Typst, etc.)
+    // {
+    //   "matchManagers": ["dockerfile"],
+    //   "enabled": false,
+    // },
+    {
+      "groupName": "latex-devcontainer",
+      "matchFileNames": ["./templates/src/latex/Dockerfile"],
+      "matchDatasources": [ "custom.texlive", "custom.chktex", "docker", ],
+      "semanticCommitType": "deps",
+      // "updateInternalDependencies": true,
+      "semanticCommitScope": "latex",
+      // "extends": ["dockerfile"],
+      "matchManagers": ["dockerfile"],
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["mcr.microsoft.com/devcontainers/*"],
+      "versioning": "debian",
+    },
+  ],
+
+  "customDatasources": {
+    "texlive": {
+      "defaultRegistryUrlTemplate": "https://ctan.org/json/pkg/texlive",
+      "transformTemplates": [
+        "{\"releases\": [{\"version\": $$.version.number }]}",
+      ],
+    },
+    "chktex": {
+      "defaultRegistryUrlTemplate": "https://ctan.org/json/pkg/chktex",
+      "transformTemplates": [
+        "{\"releases\": [{\"version\": $$.version.number }]}",
+      ],
+    },
+  },
+
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": [
+        "Update _VERSION variables in Dockerfiles"
+      ],
+      "fileMatch": [
+        "(^|/|\\.)Dockerfile$",
+        "(^|/)Dockerfile\\.[^/]*$",
+      ],
+      "matchStrings": [
+        // update *_VERSION tags
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n(?:ENV|ARG) .+?_VERSION=(?<currentValue>\\S+)",
+        // update FROM tags
+        // "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( repository=(?<registryUrl>\\S+))?\\n(?:ENV|ARG) .+?_VERSION=(?<currentValue>\\S+)",
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+    },
+  ],
 }

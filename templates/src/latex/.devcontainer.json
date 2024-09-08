@@ -95,12 +95,5 @@
       }
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/common-utils": {
-      "installZsh": true,
-      "username": "vscode",
-      "upgradePackages": true
-    }
-  },
   "postStartCommand": "tlmgr install ${templateOption:latexEngine}"
 }

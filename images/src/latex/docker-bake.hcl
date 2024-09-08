@@ -24,22 +24,10 @@ template = "${repo}/tree/main/src/templates/latex"
 image = "ghcr.io/jmuchovej/devcontainers/latex"
 
 target "latex" {
-  matrix = {
-    item = [
-      {texlive = "2024", chktex = "1.7.9", variant = "noble", },
-      {texlive = "2023", chktex = "1.7.8", variant = "jammy", },
-      {texlive = "2022", chktex = "1.7.6", variant = "jammy", },
-    ]
-  }
   name = "latex-v${replace(item.texlive, ".", "-")}"
   context = "./"
   dockerfile = "Dockerfile"
   platforms = [ "linux/amd64", "linux/arm64", ]
-  args = {
-    VARIANT = item.variant
-    CHKTEX_VERSION = "${item.chktex}"
-    TEXLIVE_VERSION = "${item.texlive}"
-  }
   labels = {
     "org.opencontainers.image.source" = repo
     "org.opencontainers.image.authors" = "John Muchovej <jmuchovej@pm.me>"

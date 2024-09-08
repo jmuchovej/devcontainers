@@ -1,30 +1,30 @@
 # syntax=docker/dockerfile:1.9
-#! Dockerfile syntax can be retrieved from https://hub.docker.com/r/docker/dockerfile
-#* Use a variant of `buildpack-deps` which includes commont tools, libraries, and
-#*   programming languages like `git`, `gcc`, `openssl`, `python`, `node`, and `julia`.
-ARG VARIANT="noble"
-ARG CHKTEX_VERSION="1.7.9"
-ARG TEXLIVE_VERSION="2024"
+# renovate: datasource=custom.chktex depName=chktex
+ARG CHKTEX_VERSION="1.7.6"
+# renovate: datasource=custom.texlive depName=texlive
+ARG TEXLIVE_VERSION="2022"
 
 ARG TEXDIR="/usr/local/texlive"
 ARG TEXUSERDIR="/texlive-user"
 
 ARG CHKTEX_MIRROR="http://download.savannah.gnu.org/releases/chktex"
-ARG TEXLIVE_MIRROR="https://mirror.ctan.org/systems/texlive/tlnet"
+ARG TEXLIVE_MIRROR="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive"
 
 ARG SCHEME="scheme-basic"
 ARG DOCFILES=0
 ARG SRCFILES=0
 
 #region chktex Builder Stage ############################################################
-FROM mcr.microsoft.com/devcontainers/base:${VARIANT} as chktex-builder
+FROM mcr.microsoft.com/devcontainers/base:jammy AS chktex-builder
 ARG CHKTEX_MIRROR
 ARG CHKTEX_VERSION
 ENV DEBIAN_FRONTEND="noninteractive"
 
+SHELL [ "/bin/bash", "-c" ]
+
 WORKDIR /tmp/chktex-builder
 
-RUN curl -fL -o- "${CHKTEX_MIRROR}/chktex-${CHKTEX_VERSION}.tar.gz" \
+RUN curl -qfL -o- "${CHKTEX_MIRROR}/chktex-${CHKTEX_VERSION}.tar.gz" \
     | tar xz --strip-components 1
 
 RUN ./configure
@@ -32,7 +32,7 @@ RUN make
 #endregion ##############################################################################
 
 #region TeXLive Builder Stage ###########################################################
-FROM mcr.microsoft.com/devcontainers/base:${VARIANT} as texlive-builder
+FROM mcr.microsoft.com/devcontainers/base:jammy AS texlive-builder
 ARG TEXLIVE_VERSION
 ARG TEXLIVE_MIRROR
 ARG TEXDIR
@@ -40,6 +40,8 @@ ARG TEXUSERDIR
 ARG SCHEME
 ARG DOCFILES
 ARG SRCFILES
+
+SHELL [ "/bin/bash", "-c" ]
 
 #! Set environment variables
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -82,22 +84,36 @@ EOF
 #*   https://tug.org/texlive/quickinstall.html
 ENV TEXLIVE_INSTALL_NO_WELCOME=1
 ENV TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1
-RUN echo "${TEXLIVE_MIRROR}"
-RUN wget -qO- "${TEXLIVE_MIRROR}/install-tl-unx.tar.gz" | tar xz --strip-components=1
-#! This prevents the `COPY --from=texlive-builer ...` directives from failing.
-RUN mkdir -p "${TEXDIR}" "${TEXUSERDIR}"
-RUN ./install-tl \
-        -profile /tmp/texlive/profile.txt \
-        -no-interaction \
-        -texdir ${TEXDIR} \
-        -texuserdir ${TEXUSERDIR}
+
+RUN <<-EOF
+path="$([ "$(date +%Y)" != "${TEXLIVE_VERSION}" ] && echo "${TEXLIVE_VERSION}/tlnet-final" || echo "${TEXLIVE_VERSION}")"
+curl -qfL -o- "${TEXLIVE_MIRROR}/${path}/install-tl-unx.tar.gz" \
+  | tar xz --strip-components=1
+
+#! This prevents the `COPY --from=texlive-builder ...` directives from failing.
+mkdir -p "${TEXDIR}" "${TEXUSERDIR}"
+EOF
+
+RUN <<-EOF
+path="$([ "$(date +%Y)" != "${TEXLIVE_VERSION}" ] && echo "${TEXLIVE_VERSION}/tlnet-final" || echo "${TEXLIVE_VERSION}")"
+./install-tl --no-interaction --texdir ${TEXDIR} --texuserdir ${TEXUSERDIR} \
+    -profile /tmp/texlive/profile.txt \
+    -repository "${TEXLIVE_MIRROR}/${path}"
+EOF
 #endregion ##############################################################################
 
 #region Output Stage ####################################################################
-FROM mcr.microsoft.com/devcontainers/base:${VARIANT} as output
+FROM mcr.microsoft.com/devcontainers/base:jammy AS output
 ENV DEBIAN_FRONTEND="noninteractive"
 ARG TEXDIR
 ARG TEXUSERDIR
+ARG TEXLIVE_VERSION
+ARG CHKTEX_VERSION
+LABEL org.opencontainers.image.source="https://github.com/jmuchovej/devcontainers"
+LABEL org.opencontainers.image.authors="John Muchovej <jmuchovej@pm.me>"
+LABEL org.opencontainers.image.url="https://github.com/jmuchovej/devcontainers/tree/main/src/templates/latex"
+LABEL org.opencontainers.image.documentation="https://github.com/jmuchovej/devcontainers/tree/main/src/templates/latex/README.md"
+LABEL org.opencontainers.image.title="LaTeX Devcontainer with TexLive ${TEXLIVE_VERSION} & chktex ${CHKTEX_VERSION}"
 
 #! Set environment variables
 ENV LANG="en_US.UTF-8"
@@ -108,7 +124,9 @@ ENV TERM="xterm"
 #*   support this form of execution.
 # ENV PATH ${TEXDIR}/bin/$(arch)-linux:${PATH}
 #!   c.f. https://github.com/docker/docker/issues/29110
-ENV PATH ${TEXDIR}/bin/aarch64-linux:${TEXDIR}/bin/x86_64-linux:${PATH}
+ENV PATH=${TEXDIR}/bin/aarch64-linux:${TEXDIR}/bin/x86_64-linux:${PATH}
+
+SHELL [ "/bin/bash", "-c" ]
 
 COPY --from=chktex-builder /tmp/chktex-builder/chktex /usr/local/bin/chktex
 COPY --from=texlive-builder "${TEXDIR}" "${TEXDIR}"
