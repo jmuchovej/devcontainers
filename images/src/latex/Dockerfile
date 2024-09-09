@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1.9
 # renovate: datasource=custom.chktex depName=chktex
-ARG CHKTEX_VERSION="1.7.8"
+ARG CHKTEX_VERSION=1.7.9
 # renovate: datasource=custom.texlive depName=texlive
-ARG TEXLIVE_VERSION="2023"
+ARG TEXLIVE_VERSION=2024
 
 ARG TEXDIR="/usr/local/texlive"
 ARG TEXUSERDIR="/texlive-user"
@@ -15,7 +15,7 @@ ARG DOCFILES=0
 ARG SRCFILES=0
 
 #region chktex Builder Stage ############################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS chktex-builder
+FROM mcr.microsoft.com/devcontainers/base:noble AS chktex-builder
 ARG CHKTEX_MIRROR
 ARG CHKTEX_VERSION
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -32,7 +32,7 @@ RUN make
 #endregion ##############################################################################
 
 #region TeXLive Builder Stage ###########################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS texlive-builder
+FROM mcr.microsoft.com/devcontainers/base:noble AS texlive-builder
 ARG TEXLIVE_VERSION
 ARG TEXLIVE_MIRROR
 ARG TEXDIR
@@ -103,7 +103,7 @@ EOF
 #endregion ##############################################################################
 
 #region Output Stage ####################################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS output
+FROM mcr.microsoft.com/devcontainers/base:noble AS output
 ENV DEBIAN_FRONTEND="noninteractive"
 ARG TEXDIR
 ARG TEXUSERDIR
