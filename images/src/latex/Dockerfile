@@ -2,7 +2,7 @@
 # renovate: datasource=custom.chktex depName=chktex
 ARG CHKTEX_VERSION="1.7.8"
 # renovate: datasource=custom.texlive depName=texlive
-ARG TEXLIVE_VERSION="2023"
+ARG TEXLIVE_VERSION=2024
 
 ARG TEXDIR="/usr/local/texlive"
 ARG TEXUSERDIR="/texlive-user"
