@@ -1,21 +1,22 @@
 # syntax=docker/dockerfile:1.9
 # renovate: datasource=custom.chktex depName=chktex
-ARG CHKTEX_VERSION="1.7.8"
+ARG CHKTEX_VERSION=1.7.9
 # renovate: datasource=custom.texlive depName=texlive
-ARG TEXLIVE_VERSION="2023"
+ARG TEXLIVE_VERSION=2024
 
 ARG TEXDIR="/usr/local/texlive"
 ARG TEXUSERDIR="/texlive-user"
 
 ARG CHKTEX_MIRROR="http://download.savannah.gnu.org/releases/chktex"
-ARG TEXLIVE_MIRROR="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive"
+ARG TEXLIVE_MIRROR="https://ftp.math.utah.edu/pub"
+ARG TEXLIVE_MIRROR="${TEXLIVE_MIRROR}/tex/historic/systems/texlive/${TEXLIVE_VERSION}"
 
 ARG SCHEME="scheme-basic"
 ARG DOCFILES=0
 ARG SRCFILES=0
 
 #region chktex Builder Stage ############################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS chktex-builder
+FROM mcr.microsoft.com/devcontainers/base:noble AS chktex-builder
 ARG CHKTEX_MIRROR
 ARG CHKTEX_VERSION
 ENV DEBIAN_FRONTEND="noninteractive"
@@ -32,7 +33,7 @@ RUN make
 #endregion ##############################################################################
 
 #region TeXLive Builder Stage ###########################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS texlive-builder
+FROM mcr.microsoft.com/devcontainers/base:noble AS texlive-builder
 ARG TEXLIVE_VERSION
 ARG TEXLIVE_MIRROR
 ARG TEXDIR
@@ -85,25 +86,28 @@ EOF
 ENV TEXLIVE_INSTALL_NO_WELCOME=1
 ENV TEXLIVE_INSTALL_NO_CONTEXT_CACHE=1
 
-RUN <<-EOF
-path="$([ "$(date +%Y)" != "${TEXLIVE_VERSION}" ] && echo "${TEXLIVE_VERSION}/tlnet-final" || echo "${TEXLIVE_VERSION}")"
-curl -qfL -o- "${TEXLIVE_MIRROR}/${path}/install-tl-unx.tar.gz" \
-  | tar xz --strip-components=1
+RUN curl -qfL -o- "${TEXLIVE_MIRROR}/install-tl-unx.tar.gz" | tar xz --strip-components=1
 
 #! This prevents the `COPY --from=texlive-builder ...` directives from failing.
-mkdir -p "${TEXDIR}" "${TEXUSERDIR}"
-EOF
+RUN mkdir -p "${TEXDIR}" "${TEXUSERDIR}"
 
 RUN <<-EOF
-path="$([ "$(date +%Y)" != "${TEXLIVE_VERSION}" ] && echo "${TEXLIVE_VERSION}/tlnet-final" || echo "${TEXLIVE_VERSION}")"
-./install-tl --no-interaction --texdir ${TEXDIR} --texuserdir ${TEXUSERDIR} \
-    -profile /tmp/texlive/profile.txt \
-    -repository "${TEXLIVE_MIRROR}/${path}"
+tl_args=(
+    "--no-interaction"
+    "--texdir" "${TEXDIR}"
+    "--texuserdir" "${TEXUSERDIR}"
+    "--profile" "/tmp/texlive/profile.txt"
+)
+#* We only need the remote repository when installing older versions of TeXLive
+if [ "${TEXLIVE_VERSION}" != "$(date +%Y)" ]; then
+    tl_args+=("--repository" "${TEXLIVE_MIRROR}/tlnet-final")
+fi
+./install-tl "${tl_args[@]}"
 EOF
 #endregion ##############################################################################
 
 #region Output Stage ####################################################################
-FROM mcr.microsoft.com/devcontainers/base:jammy AS output
+FROM mcr.microsoft.com/devcontainers/base:noble AS output
 ENV DEBIAN_FRONTEND="noninteractive"
 ARG TEXDIR
 ARG TEXUSERDIR
