@@ -1,6 +1,6 @@
 {
 	"id": "latex",
-	"version": "1.1.1",
+	"version": "1.2.0",
 	"name": "LaTeX Dev Container",
 	"description": "Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)",
 	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/",
@@ -12,8 +12,8 @@
 		"texlive": {
 			"type": "string",
 			"description": "Which version of TexLive do you want to use?",
-			"enum": ["2022", "2023", "2024", "latest"],
-			"default": "latest"
+			"enum": ["2022", "2023", "2024"],
+			"default": "2024"
 		},
 		"latexEngine": {
 			"type": "string",
