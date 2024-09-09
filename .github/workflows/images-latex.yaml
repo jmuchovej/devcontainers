@@ -3,13 +3,9 @@ name: "LaTeX: Build & Publish to ghcr.io"
 on:
   push:
     paths:
-      - "templates/src/latex/Dockerfile"
-      - "templates/src/latex/docker-bake.hcl"
-      - ".github/workflows/containers-latex.yaml"
+      - "images/src/latex/Dockerfile"
+      - ".github/workflows/images-latex.yaml"
   workflow_dispatch:
-  schedule:
-    # historically, TeXLive has been published around March
-    - cron: "0 2 1 4 *"
 
 jobs:
   build-push-latex:
@@ -34,8 +30,17 @@ jobs:
           username: "${{ github.actor }}"
           password: "${{ secrets.GITHUB_TOKEN }}"
 
+      - id: versions
+        run: |
+          v=$(grep "ARG TEXLIVE_VERSION=" images/src/latex/Dockerfile | awk '{print $2}')
+          echo "${v}" >> "${GTIHUB_OUTPUT}"
+
       - id: bake
-        uses: docker/bake-action@v5
+        uses: docker/build-push-action@v6
         with:
-          workdir: "./templates/src/latex"
+          platforms: linux/arm64,linux/amd64
+          workdir: "./images/src/latex"
           push: true
+          tags:
+            ghcr.io/jmuchovej/devcontainers/latex:${{ steps.versions.outputs.TEXLIVE_VERSION }}
+            ghcr.io/jmuchovej/devcontainers/latex:latest
