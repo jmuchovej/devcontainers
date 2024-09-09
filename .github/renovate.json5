@@ -21,7 +21,7 @@
     // },
     {
       "groupName": "latex-devcontainer",
-      "matchFileNames": ["./templates/src/latex/Dockerfile"],
+      "matchFileNames": ["./images/src/latex/Dockerfile"],
       "matchDatasources": [ "custom.texlive", "custom.chktex", "docker", ],
       "semanticCommitType": "deps",
       // "updateInternalDependencies": true,
