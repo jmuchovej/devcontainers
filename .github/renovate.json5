@@ -21,18 +21,18 @@
     // },
     {
       "groupName": "latex-devcontainer",
-      "matchFileNames": ["./images/src/latex/Dockerfile"],
-      "matchDatasources": [ "custom.texlive", "custom.chktex", "docker", ],
-      "matchManagers": ["dockerfile"],
-      "matchUpdateTypes": ["digest", "patch", "minor", "major"],
+      "matchFileNames": ["images/src/latex/Dockerfile"],
       "semanticCommitType": "deps",
       "semanticCommitScope": "latex",
+      "separateMajorMinor": false,
+      "separateMinorPatch": false,
       "enabled": true,
     },
     {
       "matchDatasources": ["docker"],
       "matchPackageNames": ["mcr.microsoft.com/devcontainers/*"],
-      "versioning": "debian",
+      "versioning": "ubuntu",
+      "enabled": true,
     },
   ],
 
