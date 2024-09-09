@@ -28,6 +28,7 @@
       "semanticCommitScope": "latex",
       // "extends": ["dockerfile"],
       "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["digest", "patch", "minor", "major"],
     },
     {
       "matchDatasources": ["docker"],
