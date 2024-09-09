@@ -3,7 +3,7 @@
 	//*   Microsoft says there's some issue with `libssl` on ARM64, so `buster` and
 	//*   `ubuntu 20.04` can't be used. Thus, we need to specify `bullseye` since 
 	//*   there's no named tag for Ubuntu variants.
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:bullseye",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:bookworm",
     "features": {
         "ghcr.io/devcontainers/features/common-utils": {
 			"installZsh": true,
