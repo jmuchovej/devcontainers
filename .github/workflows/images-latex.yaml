@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           platforms: linux/arm64,linux/amd64
-          workdir: "./images/src/latex"
+          context: "./images/src/latex"
           push: true
           tags:
             ghcr.io/jmuchovej/devcontainers/latex:${{ steps.versions.outputs.TEXLIVE_VERSION }}
