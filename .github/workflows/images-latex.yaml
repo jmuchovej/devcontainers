@@ -33,7 +33,7 @@ jobs:
       - id: versions
         run: |
           v=$(grep "ARG TEXLIVE_VERSION=" images/src/latex/Dockerfile | awk '{print $2}')
-          echo "${v}" >> "${GTIHUB_OUTPUT}"
+          echo "${v}" >> "${GITHUB_OUTPUT}"
 
       - id: bake
         uses: docker/build-push-action@v6
@@ -43,4 +43,3 @@ jobs:
           push: true
           tags:
             ghcr.io/jmuchovej/devcontainers/latex:${{ steps.versions.outputs.TEXLIVE_VERSION }}
-            ghcr.io/jmuchovej/devcontainers/latex:latest
