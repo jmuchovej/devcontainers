@@ -7,7 +7,7 @@ Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and p
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| texlive | Which version of TexLive do you want to use? | string | latest |
+| texlive | Which version of TexLive do you want to use? | string | 2024 |
 | latexEngine | Which LaTeX Engine to use | string | xetex |
 
 
