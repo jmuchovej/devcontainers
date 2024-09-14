@@ -1,0 +1,58 @@
+{
+    "on-ubuntu": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "pixi": {
+                "version": "latest"
+            }
+        },
+        "remoteUser": "vscode"
+    },
+    "on-debian": {
+        "image": "mcr.microsoft.com/devcontainers/base:debian",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "pixi": {
+                "version": "latest"
+            }
+        },
+        "remoteUser": "vscode"
+    },
+    "with-v0.29.0": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "pixi": {
+                "version": "v0.29.0"
+            }
+        },
+        "remoteUser": "vscode"
+    },
+    "with-v0.28.0": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "ghcr.io/devcontainers/features/common-utils": {
+                "installZsh": false,
+                "installOhMyZsh": false,
+                "upgradePackages": false
+            },
+            "pixi": {
+                "version": "v0.28.0"
+            }
+        },
+        "remoteUser": "vscode"
+    }
+}
