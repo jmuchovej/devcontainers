@@ -1,0 +1,36 @@
+{
+    "$schema": "https://github.com/devcontainers/spec/raw/main/schemas/devContainerFeature.schema.json",
+    "id": "pixi",
+    "version": "0.1.0",
+    "name": "pixi",
+    "documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/features/pixi",
+    "description": "Add Pixi (by Prefix.dev) to your Dev Container!",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": [
+                "latest",
+                "v0.29.0",
+                "v0.28.0",
+                "v0.27.0",
+            ],
+            "default": "latest",
+            "description": "Select (or enter) the version of pixi you want to install."
+        },
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/git",
+        "ghcr.io/devcontainers/features/github-cli",
+        "ghcr.io/devcontainers/features/common-utils"
+    ],
+    // This mount is provided to ease developer experience, particularly on MacOS.
+    //   By default, MacOS is case-insensitive; however, Linux is [by default] case-sensitive.
+    //   Thus, when running Linux-based containers but bind-mounting `/path/to/.pixi`, any
+    //   libraries with case-sensitive filenames (e.g., `ncurses`) will fail to install.
+    "mounts": [
+        { "type": "volume", "target": "${containerWorkspaceFolder}/.pixi", "source": "${devcontainerId}-pixi", }
+    ],
+    "onCreateCommand": {
+        "update .pixi permissions": "sudo chown -R $(id -u) ${containerWorkspaceFolder}/.pixi",
+    },
+}

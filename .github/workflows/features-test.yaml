@@ -18,12 +18,10 @@ jobs:
       matrix:
         features:
           - asdf
+          - pixi
         baseImage:
-          - debian:latest
-          - ubuntu:latest
-          - alpine:latest
           - mcr.microsoft.com/devcontainers/base:ubuntu
-          - mcr.microsoft.com/devcontainers/base:alpine
+          - mcr.microsoft.com/devcontainers/base:debian
     steps:
       - uses: actions/checkout@v4
 
@@ -40,6 +38,7 @@ jobs:
       matrix:
         features:
           - asdf
+          - pixi
     steps:
       - uses: actions/checkout@v4
 
