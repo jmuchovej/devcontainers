@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.9
+# syntax=docker/dockerfile:1.10
 # renovate: datasource=custom.chktex depName=chktex
 ARG CHKTEX_VERSION=1.7.9
 # renovate: datasource=custom.texlive depName=texlive
