@@ -1,5 +1,4 @@
 {
-    "$schema": "https://github.com/devcontainers/spec/raw/main/schemas/devContainerFeature.schema.json",
     "id": "pixi",
     "version": "0.1.0",
     "name": "pixi",
