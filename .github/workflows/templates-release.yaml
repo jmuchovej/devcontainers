@@ -7,7 +7,6 @@ jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-
     permissions:
       packages: write
       contents: write
@@ -23,7 +22,6 @@ jobs:
           base-path-to-templates: "./templates/src"
           generate-docs: true
           templates-namespace: "jmuchovej/templates"
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
