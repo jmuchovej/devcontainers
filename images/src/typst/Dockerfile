@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.9
+# syntax=docker/dockerfile:1.10
 #! Dockerfile syntax can be retrieved from https://hub.docker.com/r/docker/dockerfile
 #* Use a variant of `mcr.microsoft.com/devcontainers/rust` which is compatible with the
 #*   MAJOR version of Rust used by the Typst project!
