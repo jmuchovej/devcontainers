@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]; then
+  echo "You must supply arguments \`--depName\`, \`--version\`, and \`--as\`!"
+  exit 1
+fi
+
+depName=""
+version=""
+as=""
+
+while (( $# )); do
+  case $1 in
+    --depName) depName="${2}"; shift;;
+    --version) version="${2}"; shift;;
+    --as) as="${2}"; shift;;
+    *) echo "Encountered unknown parameter!"; exit 1;;
+  esac
+  shift;
+done
+
+if [ -z "${depName}" ]; then
+  echo "\`--depName <depName>\` must be supplied!"
+  exit 1;
+fi
+
+if [ -z "${version}" ]; then
+  echo "\`--version <version>\` must be supplied!"
+  exit 1;
+fi
+
+if [ -z "${as}" ]; then
+  echo "\`--as <as>\` must be supplied!"
+  exit 1;
+fi
+
+curl "https://i.jpillora.com/${depName}@${version}!?type=script&as=${as}" | bash
