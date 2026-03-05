@@ -36,7 +36,7 @@ jobs:
           echo "${v}" >> "${GITHUB_OUTPUT}"
 
       - id: bake
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           platforms: linux/arm64,linux/amd64
           context: "./images/src/latex"

@@ -35,7 +35,7 @@ jobs:
           echo "DOCKER_STACKS_VERSION=$(date +'%Y-%m-%d')" >> "${GITHUB_OUTPUT}"
 
       - id: build-push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           platforms: linux/arm64,linux/amd64
           context: "./images/src/research"
