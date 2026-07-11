@@ -1,14 +1,14 @@
 
 # LaTeX Dev Container (latex)
 
-Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)
+Write your LaTeX documents in a Dev Container! (Choose from xelatex, lualatex, pdflatex, and latex!)
 
 ## Options
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | texlive | Which version of TexLive do you want to use? | string | 2024 |
-| latexEngine | Which LaTeX Engine to use | string | xetex |
+| latexEngine | Which LaTeX Engine to use | string | xelatex |
 
 
 
