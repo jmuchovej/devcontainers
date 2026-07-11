@@ -2,12 +2,12 @@
 	"id": "latex",
 	"version": "1.2.0",
 	"name": "LaTeX Dev Container",
-	"description": "Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)",
+	"description": "Write your LaTeX documents in a Dev Container! (Choose from xelatex, lualatex, pdflatex, and latex!)",
 	"documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/",
 	"publisher": "John Muchovej <jmuchovej@users.noreply.github.com>",
 	"licenseURL": "https://github.com/jmuchovej/devcontainers/tree/main/LICENSE",
 	"platforms": ["Any"],
-	"keywords": ["latex", "xelatex", "lualatex", "pdftex"],
+	"keywords": ["latex", "xelatex", "lualatex", "pdflatex"],
 	"options": {
 		"texlive": {
 			"type": "string",
@@ -18,8 +18,8 @@
 		"latexEngine": {
 			"type": "string",
 			"description": "Which LaTeX Engine to use",
-			"enum": ["xetex", "luatex", "pdftex"],
-			"default": "xetex"
+			"enum": ["pdflatex", "xelatex", "lualatex", "latex"],
+			"default": "xelatex"
 		}
 	}
 }

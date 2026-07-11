@@ -95,5 +95,5 @@
       }
     }
   },
-  "postStartCommand": "tlmgr install ${templateOption:latexEngine}"
+  "postStartCommand": "ENGINE=${templateOption:latexEngine}; PKG=$ENGINE; [ \"$ENGINE\" = \"xelatex\" ] && PKG=xetex; [ \"$ENGINE\" = \"lualatex\" ] && PKG=luatex; [ \"$ENGINE\" = \"pdflatex\" ] && PKG=pdftex; tlmgr install \"$PKG\""
 }
