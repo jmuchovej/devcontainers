@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.9
-FROM quay.io/jupyter/datascience-notebook@sha256:dca3998d5dcb3fa63cdaf4f7b08f5c14e61baedcaad1bdbb2ac96fb0cc6b224a
+FROM quay.io/jupyter/datascience-notebook@sha256:77160324aa27c9fc775f21679b5360168e311da0736dd268429b5d4dc54dfe98
 
 SHELL [ "/bin/bash", "-eou", "pipefail", "-c" ]
 
